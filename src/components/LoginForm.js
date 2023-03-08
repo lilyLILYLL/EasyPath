@@ -13,8 +13,8 @@ export const LoginForm = () => {
             <TextInput
                 placeholder="UOW Email"
                 style={styles.input}
-                autoCorrect="none"
-                autoCapitalize={false}
+                autoCorrect={false}
+                autoCapitalize="none"
                 value={email}
                 onChangeText={setEmail}
                 onSubmitEditing={() => password_ref.current.focus()}
@@ -23,8 +23,8 @@ export const LoginForm = () => {
                 ref={password_ref}
                 placeholder="Password"
                 style={styles.input}
-                autoCorrect="none"
-                autoCapitalize={false}
+                autoCorrect={false}
+                autoCapitalize="none"
                 secureTextEntry
                 value={password}
                 onChangeText={setPassword}
