@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     checkbox: {
         flexDirection: "row",
         marginLeft: 20,
-        marginBottom: 20,
+        marginBottom: 30,
     },
     text: {
         marginLeft: 20,

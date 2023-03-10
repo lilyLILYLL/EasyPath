@@ -1,8 +1,8 @@
 export default {
     white: "#FFFFFF",
     blue: "#001540",
-    red: "#A03232",
-    whiteFont: "#FCFFFC",
+    red: "#ED0A00",
+    whiteFont: "#FFFFFF",
     loginBackgroundColor: "#001540",
-    mainBackgroundColor: "#f0f0f0",
+    mainBackgroundColor: "#f2f2f2",
 };
