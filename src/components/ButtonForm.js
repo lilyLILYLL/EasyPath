@@ -9,7 +9,7 @@ import React from "react";
 import colors from "../constants/colors";
 
 const screen = Dimensions.get("window");
-export const ButtonForm = ({ buttonText, toggle }) => {
+export const ButtonForm = ({ buttonText, toggle, onPress }) => {
     let containerStyle = styles.container;
     let textStyle = styles.text;
     if (!toggle) {
@@ -17,7 +17,7 @@ export const ButtonForm = ({ buttonText, toggle }) => {
         textStyle = [textStyle, { color: colors.blue }];
     }
     return (
-        <TouchableOpacity>
+        <TouchableOpacity onPress={onPress}>
             <View style={containerStyle}>
                 <Text style={textStyle}>{buttonText}</Text>
             </View>

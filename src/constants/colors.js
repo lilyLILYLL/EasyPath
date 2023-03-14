@@ -1,5 +1,5 @@
 export default {
-    white: "#FFFFFF",
+    white: "#FCFFFC",
     blue: "#001540",
     red: "#ED0A00",
     whiteFont: "#FFFFFF",

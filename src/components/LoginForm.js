@@ -1,34 +1,69 @@
-import { StyleSheet, Text, View, TextInput, Dimensions } from "react-native";
+import {
+    StyleSheet,
+    Text,
+    View,
+    TextInput,
+    Dimensions,
+    TouchableOpacity,
+} from "react-native";
 import React, { useState, useRef } from "react";
 import colors from "../constants/colors";
+import { Ionicons } from "@expo/vector-icons";
 
 const screen = Dimensions.get("window");
 
 export const LoginForm = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [securePassword, setSecurePassword] = useState(true);
     const password_ref = useRef();
     return (
         <View style={styles.inputContainer}>
             <TextInput
                 placeholder="UOW Email"
                 style={styles.input}
-                autoCorrect={false}
+
                 autoCapitalize="none"
+                autoCorrect={false}
+
+                
                 value={email}
                 onChangeText={setEmail}
                 onSubmitEditing={() => password_ref.current.focus()}
             />
-            <TextInput
-                ref={password_ref}
-                placeholder="Password"
-                style={styles.input}
-                autoCorrect={false}
-                autoCapitalize="none"
-                secureTextEntry
-                value={password}
-                onChangeText={setPassword}
-            />
+
+            <View style={[styles.input, styles.passwordContainer]}>
+                <TextInput
+                    ref={password_ref}
+                    placeholder="Password"
+                    autoCapitalize="none"
+                    secureTextEntry={securePassword}
+                    value={password}
+                    onChangeText={setPassword}
+                    autoCorrect={false}
+                    style={{ fontSize: 20, flex: 1 }}
+                />
+                <TouchableOpacity
+                    onPress={() => {
+                        setSecurePassword(!securePassword);
+                    }}
+                >
+                    {securePassword ? (
+                        <Ionicons
+                            name="ios-eye"
+                            size={30}
+                            color={colors.blue}
+                        />
+                    ) : (
+                        <Ionicons
+                            name="ios-eye-off"
+                            size={30}
+                            color={colors.blue}
+                        />
+                    )}
+                </TouchableOpacity>
+            </View>
+
         </View>
     );
 };
@@ -41,11 +76,15 @@ const styles = StyleSheet.create({
         alignSelf: "center",
         borderRadius: 5,
         backgroundColor: colors.white,
-        padding: 20,
+        padding: 15,
         fontSize: 20,
     },
     inputContainer: {
-        marginTop: 40,
+        marginTop: 10,
         marginBottom: 20,
+    },
+    passwordContainer: {
+        flexDirection: "row",
+        justifyContent: "space-between",
     },
 });
