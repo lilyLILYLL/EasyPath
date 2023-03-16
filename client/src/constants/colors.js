@@ -4,5 +4,6 @@ export default {
     red: "#ED0A00",
     whiteFont: "#FFFFFF",
     loginBackgroundColor: "#001540",
+    offwhite: "#f2f2f2",
     mainBackgroundColor: "#f2f2f2",
 };

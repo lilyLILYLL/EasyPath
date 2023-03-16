@@ -16,7 +16,6 @@ import colors from "../constants/colors";
 import { ButtonForm } from "../components/ButtonForm";
 import { CheckBoxButton } from "../components/CheckBoxButton";
 import { KeyBoardSpacer } from "../components/KeyBoardSpacer";
-import { Navigation } from "../components/Navigation";
 //The size of the logo: 1417 × 1166 pixels
 const screen = Dimensions.get("window");
 const radio = screen.width / 1417;
@@ -57,14 +56,14 @@ export const HomePageScreen = ({ navigation }) => {
                     buttonText="Log In"
                     toggle={true}
                     onPress={() => {
-                        navigation.push("Search");
+                        navigation.push("DrawerNavigator");
                     }}
                 />
                 <ButtonForm
                     buttonText="Login as Guest"
                     toggle={false}
                     onPress={() => {
-                        navigation.push("GuestLogin");
+                        navigation.push("DrawerNavigator");
                     }}
                 />
                 <KeyBoardSpacer

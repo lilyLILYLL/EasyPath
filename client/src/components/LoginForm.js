@@ -22,16 +22,12 @@ export const LoginForm = () => {
             <TextInput
                 placeholder="UOW Email"
                 style={styles.input}
-
                 autoCapitalize="none"
                 autoCorrect={false}
-
-                
                 value={email}
                 onChangeText={setEmail}
                 onSubmitEditing={() => password_ref.current.focus()}
             />
-
             <View style={[styles.input, styles.passwordContainer]}>
                 <TextInput
                     ref={password_ref}
@@ -63,7 +59,6 @@ export const LoginForm = () => {
                     )}
                 </TouchableOpacity>
             </View>
-
         </View>
     );
 };

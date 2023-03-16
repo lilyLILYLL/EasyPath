@@ -4,14 +4,14 @@ import { Entypo } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import colors from "../constants/colors";
 
-export const HeadBar = ({ header }) => {
+export const HeadBar = ({ header, onPress }) => {
     return (
         <View style={styles.barContainer}>
             <View style={styles.subContainer}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={onPress}>
                     <Entypo
                         name="menu"
-                        size={35}
+                        size={30}
                         color={colors.white}
                         style={styles.icon}
                     />
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     },
     header: {
         color: colors.white,
-        fontSize: 27,
+        fontSize: 26,
     },
-    icon: { marginRight: 30 },
+    icon: { marginRight: 22 },
 });
