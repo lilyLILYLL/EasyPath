@@ -17,8 +17,6 @@ import { ButtonForm } from "../components/ButtonForm";
 import { CheckBoxButton } from "../components/CheckBoxButton";
 import { KeyBoardSpacer } from "../components/KeyBoardSpacer";
 //The size of the logo: 1417 × 1166 pixels
-const screen = Dimensions.get("window");
-const radio = screen.width / 1417;
 
 export const HomePageScreen = ({ navigation }) => {
     const [keyBoardEnabled, setKeyBoardEnabled] = useState(false);
@@ -38,10 +36,6 @@ export const HomePageScreen = ({ navigation }) => {
                 onContentSizeChange={handleContentSizeChange}
             >
                 <View>
-                    <Image
-                        source={require("../assets/UOWLogos/UOW_Primary_RGB_Black.png")}
-                        style={styles.logo}
-                    />
                     <View style={styles.appName}>
                         <Text style={styles.name}>Easy Path</Text>
                     </View>
@@ -82,13 +76,7 @@ const styles = StyleSheet.create({
         marginLeft: 10,
         height: 700,
     },
-    logo: {
-        marginTop: 20,
-        marginBottom: 10,
-        width: screen.width / 3,
-        height: (1166 * radio) / 3,
-        alignSelf: "center",
-    },
+
     appName: {
         backgroundColor: colors.blue,
         height: 100,

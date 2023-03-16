@@ -14,15 +14,12 @@ import colors from "../constants/colors.js";
 import { RecentSearchItem } from "../components/RecentSearchItem";
 import { StatusBar } from "expo-status-bar";
 import { useNavigation, DrawerActions } from "@react-navigation/native";
+import { Logo } from "../components/Logo";
 
-const screen = Dimensions.get("window");
-const radio = screen.width / 1417;
-export const SearchPageScreen = (props) => {
+export const SearchPageScreen = () => {
     const navigation = useNavigation();
-    console.log(props);
-    console.log(navigation);
+
     const toggleDrawer = () => {
-        console.log("toggle Drawer");
         navigation.openDrawer();
     };
     return (
@@ -32,10 +29,7 @@ export const SearchPageScreen = (props) => {
             <SearchBar />
             <View style={styles.logoView}>
                 <Text style={styles.lastLogin}>Last Login: 10/10/2022</Text>
-                <Image
-                    source={require("../assets/UOWLogos/UOW_Primary_RGB_Black.png")}
-                    style={styles.logo}
-                />
+                <Logo size={1 / 4} />
             </View>
             <View style={styles.recentSearch}>
                 <Text style={styles.headerText}>Recent Searches</Text>
@@ -66,10 +60,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: colors.blue,
     },
-    logo: {
-        width: screen.width / 5,
-        height: (1166 * radio) / 5,
-    },
+
     recentSearch: {
         height: 600,
     },
