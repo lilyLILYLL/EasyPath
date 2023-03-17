@@ -18,7 +18,7 @@ import { CheckBoxButton } from "../components/CheckBoxButton";
 import { KeyBoardSpacer } from "../components/KeyBoardSpacer";
 import { Logo } from "../components/Logo";
 
-export const HomePageScreen = ({ navigation }) => {
+export const LoginScreen = ({ navigation }) => {
     const [keyBoardEnabled, setKeyBoardEnabled] = useState(false);
 
     const scroll_ref = useRef(null);

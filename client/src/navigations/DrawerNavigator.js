@@ -6,7 +6,7 @@ import {
     DrawerItem,
 } from "@react-navigation/drawer";
 
-import { SearchPageScreen } from "../screens/SearchPageScreen";
+import { WelcomeScreen } from "../screens/WelcomeScreen";
 import { InterestedPlacesScreen } from "../screens/InterestedPlacesScreen";
 import { MapScreen } from "../screens/MapScreen";
 import {
@@ -38,7 +38,7 @@ const CustomDrawerMenu = (props) => {
                 <DrawerItem label="Visit Us" />
                 <TouchableOpacity
                     onPress={() => {
-                        props.navigation.navigate("Home");
+                        props.navigation.navigate("LoginScreen");
                     }}
                 >
                     <View style={styles.button}>
@@ -54,18 +54,22 @@ const Drawer = createDrawerNavigator();
 export const DrawerNavigator = () => {
     return (
         <Drawer.Navigator
-            initialRouteName="Search"
+            initialRouteName="MapScreen"
             drawerContent={(props) => <CustomDrawerMenu {...props} />}
             screenOptions={{
                 drawerPosition: "left",
             }}
         >
             <Drawer.Screen
-                name="Search"
-                component={SearchPageScreen}
+                name="WelcomeScreen"
+                component={WelcomeScreen}
                 options={{ headerShown: false }}
             />
-            <Drawer.Screen name="MapScreen" component={MapScreen} />
+            <Drawer.Screen
+                name="MapScreen"
+                component={MapScreen}
+                options={{ headerShown: false }}
+            />
             <Drawer.Screen
                 name="Places of Interest"
                 component={InterestedPlacesScreen}

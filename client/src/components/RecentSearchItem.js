@@ -19,10 +19,10 @@ export const RecentSearchItem = ({
                     <Text style={styles.text}>Time: </Text>
                 </View>
                 <View>
-                    <Text style={styles.text}>Engineering Building 4</Text>
-                    <Text style={styles.text}>Library Building 16</Text>
-                    <Text style={styles.text}>10/10/2022</Text>
-                    <Text style={styles.text}>6 Minute Walk</Text>
+                    <Text style={styles.text}>{startLocation}</Text>
+                    <Text style={styles.text}>{destination}</Text>
+                    <Text style={styles.text}>{date}</Text>
+                    <Text style={styles.text}>{time} Minute Walk</Text>
                 </View>
             </View>
             <View style={styles.seperator}></View>

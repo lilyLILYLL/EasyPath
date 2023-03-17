@@ -2,27 +2,30 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { AuthContextProvider } from "../contexts/AuthContext";
+import { SearchContextProvider } from "../contexts/SearchContext";
 import { DrawerNavigator } from "./DrawerNavigator";
-import { HomePageScreen } from "../screens/HomePageScreen";
+import { LoginScreen } from "../screens/LoginScreen";
 
 const MainStack = createNativeStackNavigator();
 export const Navigation = () => {
     return (
         <AuthContextProvider>
-            <NavigationContainer>
-                <MainStack.Navigator initialRouteName="Home">
-                    <MainStack.Screen
-                        name="HomePageScreen"
-                        component={HomePageScreen}
-                        options={{ headerShown: false }}
-                    />
-                    <MainStack.Screen
-                        name="DrawerNavigator"
-                        component={DrawerNavigator}
-                        options={{ headerShown: false }}
-                    />
-                </MainStack.Navigator>
-            </NavigationContainer>
+            <SearchContextProvider>
+                <NavigationContainer>
+                    <MainStack.Navigator initialRouteName="DrawerNavigator">
+                        <MainStack.Screen
+                            name="LoginScreen"
+                            component={LoginScreen}
+                            options={{ headerShown: false }}
+                        />
+                        <MainStack.Screen
+                            name="DrawerNavigator"
+                            component={DrawerNavigator}
+                            options={{ headerShown: false }}
+                        />
+                    </MainStack.Navigator>
+                </NavigationContainer>
+            </SearchContextProvider>
         </AuthContextProvider>
     );
 };

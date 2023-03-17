@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import React from "react";
 
 import colors from "../constants/colors";
@@ -21,12 +21,14 @@ export const InterestedPlaces = () => {
     );
 };
 
-const LocationItem = ({ icon, locationName }) => {
+const LocationItem = ({ icon, locationName, onPress }) => {
     return (
-        <View style={styles.locationItem}>
-            <Text style={styles.icon}>{icon}</Text>
-            <Text style={styles.locationText}>{locationName}</Text>
-        </View>
+        <TouchableOpacity onPress={onPress}>
+            <View style={styles.locationItem}>
+                <Text style={styles.icon}>{icon}</Text>
+                <Text style={styles.locationText}>{locationName}</Text>
+            </View>
+        </TouchableOpacity>
     );
 };
 
