@@ -9,7 +9,13 @@ import {
 import { SearchPageScreen } from "../screens/SearchPageScreen";
 import { InterestedPlacesScreen } from "../screens/InterestedPlacesScreen";
 import { MapScreen } from "../screens/MapScreen";
-import { SafeAreaView, View, Text, StyleSheet } from "react-native";
+import {
+    SafeAreaView,
+    View,
+    Text,
+    StyleSheet,
+    TouchableOpacity,
+} from "react-native";
 import { Entypo } from "@expo/vector-icons";
 import colors from "../constants/colors";
 
@@ -28,8 +34,17 @@ const CustomDrawerMenu = (props) => {
                 />
             </View>
             <DrawerContentScrollView {...props}>
-                <DrawerItem label="Visit Us" />
                 <DrawerItemList {...props} />
+                <DrawerItem label="Visit Us" />
+                <TouchableOpacity
+                    onPress={() => {
+                        props.navigation.navigate("Home");
+                    }}
+                >
+                    <View style={styles.button}>
+                        <Text style={styles.buttonText}>Log Out</Text>
+                    </View>
+                </TouchableOpacity>
             </DrawerContentScrollView>
         </SafeAreaView>
     );
@@ -74,6 +89,18 @@ const styles = StyleSheet.create({
     header: {
         fontSize: 30,
         fontWeight: "bold",
+        color: colors.white,
+    },
+    button: {
+        backgroundColor: colors.blue,
+        padding: 15,
+        borderRadius: 20,
+        marginHorizontal: 10,
+        marginTop: 30,
+    },
+    buttonText: {
+        fontSize: 20,
+        alignSelf: "center",
         color: colors.white,
     },
 });

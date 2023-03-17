@@ -16,7 +16,7 @@ import colors from "../constants/colors";
 import { ButtonForm } from "../components/ButtonForm";
 import { CheckBoxButton } from "../components/CheckBoxButton";
 import { KeyBoardSpacer } from "../components/KeyBoardSpacer";
-//The size of the logo: 1417 × 1166 pixels
+import { Logo } from "../components/Logo";
 
 export const HomePageScreen = ({ navigation }) => {
     const [keyBoardEnabled, setKeyBoardEnabled] = useState(false);
@@ -36,6 +36,7 @@ export const HomePageScreen = ({ navigation }) => {
                 onContentSizeChange={handleContentSizeChange}
             >
                 <View>
+                    <Logo size={1 / 3} />
                     <View style={styles.appName}>
                         <Text style={styles.name}>Easy Path</Text>
                     </View>

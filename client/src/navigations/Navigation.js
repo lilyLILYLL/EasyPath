@@ -12,7 +12,7 @@ export const Navigation = () => {
             <NavigationContainer>
                 <MainStack.Navigator initialRouteName="Home">
                     <MainStack.Screen
-                        name="Home"
+                        name="HomePageScreen"
                         component={HomePageScreen}
                         options={{ headerShown: false }}
                     />

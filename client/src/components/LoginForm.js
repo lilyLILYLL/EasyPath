@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
     },
     inputContainer: {
-        marginTop: 10,
+        marginTop: 50,
         marginBottom: 20,
     },
     passwordContainer: {
