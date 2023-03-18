@@ -5,6 +5,7 @@ import { AuthContextProvider } from "../contexts/AuthContext";
 import { SearchContextProvider } from "../contexts/SearchContext";
 import { DrawerNavigator } from "./DrawerNavigator";
 import { LoginScreen } from "../screens/LoginScreen";
+import { SearchSuggestionScreen } from "../screens/SearchSuggestionScreen";
 
 const MainStack = createNativeStackNavigator();
 export const Navigation = () => {
@@ -21,6 +22,11 @@ export const Navigation = () => {
                         <MainStack.Screen
                             name="DrawerNavigator"
                             component={DrawerNavigator}
+                            options={{ headerShown: false }}
+                        />
+                        <MainStack.Screen
+                            name="SearchSuggestionScreen"
+                            component={SearchSuggestionScreen}
                             options={{ headerShown: false }}
                         />
                     </MainStack.Navigator>

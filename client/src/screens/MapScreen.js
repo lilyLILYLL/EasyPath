@@ -13,7 +13,6 @@ export const MapScreen = ({ navigation }) => {
     const { addSearch, recentSearch } = useContext(SearchContext);
     const search = (start, destination) => {
         // update the context of recent searches
-
         addSearch(startLocation, destination);
 
         // showing on the map (i'll add it up later because we haven't had a map yet.)

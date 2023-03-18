@@ -4,7 +4,7 @@ import React from "react";
 import colors from "../constants/colors";
 import interestedPlaces from "../constants/interestedPlaces";
 
-export const InterestedPlaces = () => {
+export const InterestedPlaces = ({ onPress }) => {
     return (
         <View style={styles.container}>
             {interestedPlaces &&
@@ -13,6 +13,7 @@ export const InterestedPlaces = () => {
                         <LocationItem
                             icon={icon}
                             locationName={location}
+                            onPress={onPress}
                             key={index}
                         />
                     );

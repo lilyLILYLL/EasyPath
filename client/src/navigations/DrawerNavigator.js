@@ -54,7 +54,7 @@ const Drawer = createDrawerNavigator();
 export const DrawerNavigator = () => {
     return (
         <Drawer.Navigator
-            initialRouteName="MapScreen"
+            initialRouteName="WelcomeScreen"
             drawerContent={(props) => <CustomDrawerMenu {...props} />}
             screenOptions={{
                 drawerPosition: "left",
