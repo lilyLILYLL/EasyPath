@@ -8,11 +8,18 @@ export const InterestedPlacesScreen = ({ navigation }) => {
     const toggleDrawer = () => {
         navigation.openDrawer();
     };
-    const showSuggestionList = () => navigation.push("SearchSuggestionScreen");
+    const showSuggestionList = () =>
+        navigation.push("SearchSuggestionScreen", {
+            placeholderText: "Choose Destination",
+            title: "destination",
+        });
     return (
         <SafeAreaView>
             <HeadBar header="Places of Interest" onPress={toggleDrawer} />
-            <SearchBar onPress={showSuggestionList} />
+            <SearchBar
+                onPress={showSuggestionList}
+                placeholderText="Search here"
+            />
             <View style={styles.contentBox}>
                 <InterestedPlaces />
                 <View style={styles.logo}>

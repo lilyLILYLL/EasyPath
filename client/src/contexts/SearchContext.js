@@ -8,7 +8,7 @@ export const SearchContext = createContext();
 export const SearchContextProvider = ({ children }) => {
     const [recentSearch, setRecentSearch] = useState([]);
     console.log(recentSearch);
-    const addSearch = (startPoint, destination) => {
+    const addSearch = ({ startPoint, destination }) => {
         setRecentSearch([
             {
                 from: startPoint,

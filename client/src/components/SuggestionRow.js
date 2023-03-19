@@ -3,9 +3,9 @@ import React from "react";
 import colors from "../constants/colors";
 import { EvilIcons } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-export const SuggestionRow = ({ name }) => {
+export const SuggestionRow = ({ name, onPress }) => {
     return (
-        <TouchableOpacity>
+        <TouchableOpacity onPress={onPress}>
             <View style={styles.row}>
                 <EvilIcons name="search" size={25} />
                 <Text style={styles.rowText}>{name}</Text>
@@ -25,6 +25,6 @@ const styles = StyleSheet.create({
     rowText: {
         fontSize: 18,
         marginLeft: 20,
-        marginRight: 180,
+        flex: 1,
     },
 });

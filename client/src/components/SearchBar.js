@@ -7,11 +7,17 @@ import {
     TouchableOpacity,
 } from "react-native";
 import React from "react";
-import { AntDesign } from "@expo/vector-icons";
+import { AntDesign, Ionicons } from "@expo/vector-icons";
 import colors from "../constants/colors";
 import { Entypo } from "@expo/vector-icons";
 
-export const SearchBar = ({ onPress, isInputFocused, goBack }) => {
+export const SearchBar = ({
+    onPress,
+    isInputFocused,
+    goBack,
+    placeholderText,
+    value,
+}) => {
     return (
         <SafeAreaView style={styles.searchBar}>
             {isInputFocused ? (
@@ -22,14 +28,18 @@ export const SearchBar = ({ onPress, isInputFocused, goBack }) => {
                         onPress={goBack}
                     />
                 </TouchableOpacity>
-            ) : null}
+            ) : (
+                <Ionicons name="location" size={35} color={colors.blue} />
+            )}
+
             <TextInput
-                placeholder="Search UOW Campus"
+                placeholder={placeholderText}
                 style={styles.text}
                 onFocus={onPress}
                 autoFocus={isInputFocused}
+                value={value}
             />
-            <AntDesign name="search1" color={colors.blue} size={20} />
+            <AntDesign name="search1" color={colors.blue} size={25} />
         </SafeAreaView>
     );
 };
@@ -39,17 +49,18 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         borderColor: "black",
         borderWidth: 1,
-        borderRadius: 25,
+        borderRadius: 30,
         backgroundColor: colors.white,
-        marginTop: 10,
-        marginHorizontal: 10,
+        marginTop: 15,
+        marginHorizontal: 15,
         paddingHorizontal: 15,
-        paddingVertical: 15,
+        paddingVertical: 8,
+        alignItems: "center",
     },
     text: {
-        fontSize: 18,
+        fontSize: 20,
         color: colors.blue,
-        marginLeft: 10,
+        marginLeft: 20,
         flex: 1,
     },
 });

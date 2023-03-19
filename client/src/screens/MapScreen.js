@@ -1,25 +1,40 @@
-import { StyleSheet, Text, View, SafeAreaView, TextInput } from "react-native";
+import {
+    StyleSheet,
+    Text,
+    View,
+    SafeAreaView,
+    TouchableOpacity,
+} from "react-native";
 import React, { useState, useRef, useContext } from "react";
 import { HeadBar } from "../components/HeadBar";
 import colors from "../constants/colors";
 import { StatusBar } from "expo-status-bar";
 import { SearchContext } from "../contexts/SearchContext";
+import { SearchBar } from "../components/SearchBar";
+import { LocationContext } from "../contexts/LocationContext";
+import { FontAwesome } from "@expo/vector-icons";
 
 export const MapScreen = ({ navigation }) => {
-    const [startLocation, setStartLocation] = useState("");
-    const [destination, setDestination] = useState("");
-    const destination_ref = useRef(null);
+    const { startPoint, destination } = useContext(LocationContext);
+    const { addSearch } = useContext(SearchContext);
+    console.log({ startPoint, destination });
 
-    const { addSearch, recentSearch } = useContext(SearchContext);
-    const search = (start, destination) => {
-        // update the context of recent searches
-        addSearch(startLocation, destination);
+    const searchStartPoint = () => {
+        navigation.push("SearchSuggestionScreen", {
+            placeholderText: "Choose Start Point",
+            title: "startPoint",
+        });
+    };
+    const searchDestination = () => {
+        navigation.push("SearchSuggestionScreen", {
+            placeholderText: "Choose Destination",
+            title: "destination",
+        });
+    };
 
-        // showing on the map (i'll add it up later because we haven't had a map yet.)
-
-        // Set value back to ""
-        setStartLocation("");
-        setDestination("");
+    const search = ({ startPoint, destination }) => {
+        addSearch({ startPoint, destination });
+        navigation.navigate("WelcomeScreen");
     };
 
     return (
@@ -31,40 +46,29 @@ export const MapScreen = ({ navigation }) => {
                     navigation.openDrawer();
                 }}
             />
-            <View style={styles.contentBox}>
-                <View style={styles.inputBox}>
-                    <View style={styles.labelBox}>
-                        <Text style={styles.label}> Start </Text>
-                    </View>
-                    <TextInput
-                        placeholder="Enter your start location"
-                        style={styles.inputText}
-                        value={startLocation}
-                        onChangeText={(text) => setStartLocation(text)}
-                        onSubmitEditing={() => destination_ref.current.focus()}
+            <SearchBar
+                placeholderText={"Choose Start Point"}
+                onPress={searchStartPoint}
+                value={startPoint}
+            />
+            <SearchBar
+                placeholderText={"Choose Destination"}
+                onPress={searchDestination}
+                value={destination}
+            />
+            <TouchableOpacity
+                onPress={() => search({ startPoint, destination })}
+            >
+                <View style={styles.startButton}>
+                    <FontAwesome
+                        name="location-arrow"
+                        size={20}
+                        color={colors.white}
                     />
+                    <Text style={styles.buttonText}>Start</Text>
                 </View>
-                <View style={styles.inputBox}>
-                    <View style={styles.labelBox}>
-                        <Text style={styles.label}> Destination </Text>
-                    </View>
-
-                    <TextInput
-                        ref={destination_ref}
-                        placeholder="Enter your destination"
-                        style={styles.inputText}
-                        value={destination}
-                        onChangeText={(text) => setDestination(text)}
-                        onSubmitEditing={() => {
-                            search(startLocation, destination);
-                            navigation.navigate("WelcomeScreen");
-                        }}
-                    />
-                </View>
-                <View style={styles.mapView}>
-                    <Text style={styles.mapText}>Here is Map View</Text>
-                </View>
-            </View>
+            </TouchableOpacity>
+            <Text style={styles.text}> Map View Here</Text>
         </SafeAreaView>
     );
 };
@@ -103,5 +107,28 @@ const styles = StyleSheet.create({
     mapText: {
         fontWeight: "bold",
         fontSize: 40,
+    },
+    startButton: {
+        flexDirection: "row",
+        borderWidth: 1,
+        borderColor: "black",
+        padding: 10,
+        marginHorizontal: 150,
+        marginTop: 20,
+        borderRadius: 15,
+        backgroundColor: colors.blue,
+        justifyContent: "center",
+    },
+    buttonText: {
+        marginLeft: 10,
+        fontSize: 18,
+        fontWeight: "bold",
+        color: colors.white,
+    },
+    text: {
+        fontWeight: "bold",
+        alignSelf: "center",
+        marginTop: 100,
+        fontSize: 30,
     },
 });

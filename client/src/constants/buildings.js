@@ -1,6 +1,6 @@
 export default [
-    "Building 1",
-    "Building 2",
+    "Library Building 1",
+    "Food Court Building 2",
     "Building 3",
     "Building 4",
     "Building 5",

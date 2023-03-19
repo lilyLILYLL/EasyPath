@@ -25,12 +25,19 @@ export const WelcomeScreen = () => {
     const toggleDrawer = () => {
         navigation.openDrawer();
     };
-    const showSuggestionList = () => navigation.push("SearchSuggestionScreen");
+    const showSuggestionList = () =>
+        navigation.push("SearchSuggestionScreen", {
+            placeholderText: "Choose Destination",
+            title: "destination",
+        });
     return (
         <SafeAreaView style={styles.container}>
             <StatusBar />
             <HeadBar header="Welcome John Doe" onPress={toggleDrawer} />
-            <SearchBar onPress={showSuggestionList} />
+            <SearchBar
+                onPress={showSuggestionList}
+                placeholderText="Search here"
+            />
 
             <View>
                 <View style={styles.logoView}>
