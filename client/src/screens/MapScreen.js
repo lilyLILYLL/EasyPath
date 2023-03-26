@@ -14,9 +14,12 @@ import { SearchBar } from "../components/SearchBar";
 import { LocationContext } from "../contexts/LocationContext";
 import { FontAwesome } from "@expo/vector-icons";
 
+const DUMMY_DATE = "10/10/2023";
+const DUMMY_TIME = 6;
+
 export const MapScreen = ({ navigation }) => {
     const { startPoint, destination } = useContext(LocationContext);
-    const { addSearch } = useContext(SearchContext);
+    const { addRecentSearch } = useContext(SearchContext);
     console.log({ startPoint, destination });
 
     const searchStartPoint = () => {
@@ -32,8 +35,8 @@ export const MapScreen = ({ navigation }) => {
         });
     };
 
-    const search = ({ startPoint, destination }) => {
-        addSearch({ startPoint, destination });
+    const search = (startPoint, destination) => {
+        addRecentSearch(startPoint, destination, DUMMY_DATE, DUMMY_TIME);
         navigation.navigate("WelcomeScreen");
     };
 
@@ -56,9 +59,7 @@ export const MapScreen = ({ navigation }) => {
                 onPress={searchDestination}
                 value={destination}
             />
-            <TouchableOpacity
-                onPress={() => search({ startPoint, destination })}
-            >
+            <TouchableOpacity onPress={() => search(startPoint, destination)}>
                 <View style={styles.startButton}>
                     <FontAwesome
                         name="location-arrow"

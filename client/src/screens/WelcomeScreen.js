@@ -7,7 +7,7 @@ import {
     Dimensions,
     ScrollView,
 } from "react-native";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { HeadBar } from "../components/HeadBar";
 import { SearchBar } from "../components/SearchBar";
 import colors from "../constants/colors.js";
@@ -16,12 +16,17 @@ import { StatusBar } from "expo-status-bar";
 import { useNavigation, DrawerActions } from "@react-navigation/native";
 import { Logo } from "../components/Logo";
 import { SearchContext } from "../contexts/SearchContext";
-import { SearchSuggestionScreen } from "./SearchSuggestionScreen";
-
+import { useIsFocused } from "@react-navigation/native";
 export const WelcomeScreen = () => {
     const navigation = useNavigation();
-    const { recentSearch } = useContext(SearchContext);
+    const { recentSearch, fetch } = useContext(SearchContext);
+    const isFocused = useIsFocused();
 
+    useEffect(() => {
+        if (isFocused) {
+            fetch();
+        }
+    }, [isFocused]);
     const toggleDrawer = () => {
         navigation.openDrawer();
     };
@@ -30,6 +35,7 @@ export const WelcomeScreen = () => {
             placeholderText: "Choose Destination",
             title: "destination",
         });
+
     return (
         <SafeAreaView style={styles.container}>
             <StatusBar />

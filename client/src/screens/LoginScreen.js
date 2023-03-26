@@ -6,15 +6,12 @@ import {
     ScrollView,
     Image,
     View,
-    Dimensions,
 } from "react-native";
 
-import React, { useState, useRef } from "react";
+import React, { useRef, useState } from "react";
 import { HeadBar } from "../components/HeadBar";
 import { LoginForm } from "../components/LoginForm";
 import colors from "../constants/colors";
-import { ButtonForm } from "../components/ButtonForm";
-import { CheckBoxButton } from "../components/CheckBoxButton";
 import { KeyBoardSpacer } from "../components/KeyBoardSpacer";
 import { Logo } from "../components/Logo";
 
@@ -31,6 +28,7 @@ export const LoginScreen = ({ navigation }) => {
             <StatusBar barStyle="dark-content" />
             <HeadBar header="Log In" />
             <ScrollView
+                keyboardShouldPersistTaps="always"
                 style={styles.contentContainer}
                 ref={scroll_ref}
                 onContentSizeChange={handleContentSizeChange}
@@ -44,23 +42,8 @@ export const LoginScreen = ({ navigation }) => {
                     <View style={styles.underline} />
                 </View>
 
-                <LoginForm />
+                <LoginForm navigation={navigation} />
 
-                <CheckBoxButton text="Remember me" />
-                <ButtonForm
-                    buttonText="Log In"
-                    toggle={true}
-                    onPress={() => {
-                        navigation.push("DrawerNavigator");
-                    }}
-                />
-                <ButtonForm
-                    buttonText="Login as Guest"
-                    toggle={false}
-                    onPress={() => {
-                        navigation.push("DrawerNavigator");
-                    }}
-                />
                 <KeyBoardSpacer
                     onToggle={(keyBoardEnabled) => {
                         setKeyBoardEnabled(keyBoardEnabled);

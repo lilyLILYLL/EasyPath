@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useContext } from "react";
 import {
     createDrawerNavigator,
     DrawerContentScrollView,
@@ -18,8 +18,10 @@ import {
 } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 import colors from "../constants/colors";
+import { AuthContext } from "../contexts/AuthContext";
 
 const CustomDrawerMenu = (props) => {
+    const { logout } = useContext(AuthContext);
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <View style={styles.menuHeaderBox}>
@@ -42,7 +44,9 @@ const CustomDrawerMenu = (props) => {
                     }}
                 >
                     <View style={styles.button}>
-                        <Text style={styles.buttonText}>Log Out</Text>
+                        <Text style={styles.buttonText} onPress={logout}>
+                            Log Out
+                        </Text>
                     </View>
                 </TouchableOpacity>
             </DrawerContentScrollView>
@@ -54,7 +58,7 @@ const Drawer = createDrawerNavigator();
 export const DrawerNavigator = () => {
     return (
         <Drawer.Navigator
-            initialRouteName="MapScreen"
+            initialRouteName="WelcomeScreen"
             drawerContent={(props) => <CustomDrawerMenu {...props} />}
             screenOptions={{
                 drawerPosition: "left",

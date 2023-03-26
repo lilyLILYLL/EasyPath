@@ -5,18 +5,24 @@ import {
     TextInput,
     Dimensions,
     TouchableOpacity,
+    ActivityIndicator,
 } from "react-native";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext } from "react";
 import colors from "../constants/colors";
 import { Ionicons } from "@expo/vector-icons";
+import { ButtonForm } from "../components/ButtonForm";
+import { CheckBoxButton } from "../components/CheckBoxButton";
+import { AuthContext } from "../contexts/AuthContext";
 
 const screen = Dimensions.get("window");
 
-export const LoginForm = () => {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+export const LoginForm = ({ navigation }) => {
     const [securePassword, setSecurePassword] = useState(true);
     const password_ref = useRef();
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const { login, state, logout } = useContext(AuthContext);
+
     return (
         <View style={styles.inputContainer}>
             <TextInput
@@ -59,6 +65,28 @@ export const LoginForm = () => {
                     )}
                 </TouchableOpacity>
             </View>
+
+            <CheckBoxButton text="Remember me" />
+            {state.isLoading ? (
+                <ActivityIndicator size="large" color="#0000ff" />
+            ) : null}
+            {state.errorMessage ? (
+                <Text style={styles.errorMessage}>{state.errorMessage}</Text>
+            ) : null}
+            <ButtonForm
+                buttonText="Log In"
+                toggle={true}
+                onPress={() => {
+                    login(email, password);
+                }}
+            />
+            <ButtonForm
+                buttonText="Login as Guest"
+                toggle={false}
+                onPress={() => {
+                    // navigation.push("DrawerNavigator");
+                }}
+            />
         </View>
     );
 };
@@ -81,5 +109,10 @@ const styles = StyleSheet.create({
     passwordContainer: {
         flexDirection: "row",
         justifyContent: "space-between",
+    },
+    errorMessage: {
+        color: colors.red,
+        fontSize: 16,
+        marginLeft: 20,
     },
 });
