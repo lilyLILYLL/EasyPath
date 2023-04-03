@@ -4,10 +4,13 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { AuthContextProvider } from "../contexts/AuthContext";
 import { SearchContextProvider } from "../contexts/SearchContext";
 import { LocationContextProvider } from "../contexts/LocationContext";
-import { DrawerNavigator } from "./DrawerNavigator";
 import { LoginScreen } from "../screens/LoginScreen";
+import { DrawerNavigator } from "../navigations/DrawerNavigator";
+import { MapScreen } from "../screens/MapScreen";
 import { SearchSuggestionScreen } from "../screens/SearchSuggestionScreen";
+
 import { navigationRef } from "./RootNavigation";
+import Screens from "../constants/Screens";
 const MainStack = createNativeStackNavigator();
 export const Navigation = () => {
     return (
@@ -15,19 +18,25 @@ export const Navigation = () => {
             <SearchContextProvider>
                 <LocationContextProvider>
                     <NavigationContainer ref={navigationRef}>
-                        <MainStack.Navigator initialRouteName="LoginScreen">
+                        <MainStack.Navigator initialRouteName={Screens.LOGIN}>
                             <MainStack.Screen
-                                name="LoginScreen"
+                                name={Screens.LOGIN}
                                 component={LoginScreen}
                                 options={{ headerShown: false }}
                             />
                             <MainStack.Screen
-                                name="DrawerNavigator"
+                                name={Screens.DRAWER_NAVIGATOR}
                                 component={DrawerNavigator}
                                 options={{ headerShown: false }}
                             />
                             <MainStack.Screen
-                                name="SearchSuggestionScreen"
+                                name={Screens.MAP}
+                                component={MapScreen}
+                                options={{ headerShown: false }}
+                            />
+
+                            <MainStack.Screen
+                                name={Screens.SUGGESTION}
                                 component={SearchSuggestionScreen}
                                 options={{ headerShown: false }}
                             />

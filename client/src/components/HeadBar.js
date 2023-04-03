@@ -3,19 +3,13 @@ import React from "react";
 import { Entypo } from "@expo/vector-icons";
 import colors from "../constants/colors";
 
-export const HeadBar = ({ header, onPress }) => {
+export const HeadBar = ({ header, onPress, icon }) => {
     return (
         <View style={styles.barContainer}>
-            <TouchableOpacity onPress={onPress}>
-                <Entypo
-                    name="menu"
-                    size={35}
-                    color={colors.white}
-                    style={styles.icon}
-                />
-            </TouchableOpacity>
-
-            <Text style={styles.header}>{header}</Text>
+            <TouchableOpacity onPress={onPress}>{icon}</TouchableOpacity>
+            <View style={styles.headerBox}>
+                <Text style={styles.header}>{header}</Text>
+            </View>
         </View>
     );
 };
@@ -32,5 +26,10 @@ const styles = StyleSheet.create({
         color: colors.white,
         fontSize: 30,
     },
-    icon: { marginRight: 50 },
+    headerBox: {
+        flex: 1,
+        alignItems: "center",
+        marginRight: 20,
+    },
+    icon: {},
 });

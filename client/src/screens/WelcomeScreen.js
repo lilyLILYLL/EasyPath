@@ -1,12 +1,4 @@
-import {
-    StyleSheet,
-    Text,
-    View,
-    SafeAreaView,
-    Image,
-    Dimensions,
-    ScrollView,
-} from "react-native";
+import { StyleSheet, Text, View, SafeAreaView, ScrollView } from "react-native";
 import React, { useContext, useEffect } from "react";
 import { HeadBar } from "../components/HeadBar";
 import { SearchBar } from "../components/SearchBar";
@@ -17,29 +9,48 @@ import { useNavigation, DrawerActions } from "@react-navigation/native";
 import { Logo } from "../components/Logo";
 import { SearchContext } from "../contexts/SearchContext";
 import { useIsFocused } from "@react-navigation/native";
+import { Entypo } from "@expo/vector-icons";
+import moment from "moment";
+import Screens from "../constants/Screens";
 export const WelcomeScreen = () => {
     const navigation = useNavigation();
     const { recentSearch, fetch } = useContext(SearchContext);
     const isFocused = useIsFocused();
+    const currentDate = moment().format("DD/MM/YYYY");
+    console.log(currentDate);
 
     useEffect(() => {
         if (isFocused) {
             fetch();
         }
     }, [isFocused]);
+
     const toggleDrawer = () => {
         navigation.openDrawer();
     };
+
     const showSuggestionList = () =>
-        navigation.push("SearchSuggestionScreen", {
+        navigation.push(Screens.SUGGESTION, {
             placeholderText: "Choose Destination",
             title: "destination",
+            goBackTo: Screens.WELCOME,
         });
 
     return (
         <SafeAreaView style={styles.container}>
             <StatusBar />
-            <HeadBar header="Welcome John Doe" onPress={toggleDrawer} />
+            <HeadBar
+                header="Welcome John Doe"
+                onPress={toggleDrawer}
+                icon={
+                    <Entypo
+                        name="menu"
+                        size={35}
+                        color={colors.white}
+                        style={styles.icon}
+                    />
+                }
+            />
             <SearchBar
                 onPress={showSuggestionList}
                 placeholderText="Search here"
@@ -47,7 +58,9 @@ export const WelcomeScreen = () => {
 
             <View>
                 <View style={styles.logoView}>
-                    <Text style={styles.lastLogin}>Last Login: 10/10/2022</Text>
+                    <Text style={styles.lastLogin}>
+                        Last Login: {currentDate}
+                    </Text>
                     <Logo size={1 / 4} />
                 </View>
                 <View style={styles.recentSearch}>

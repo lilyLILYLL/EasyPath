@@ -14,10 +14,12 @@ import { Ionicons } from "@expo/vector-icons";
 import { SuggestionRow } from "../components/SuggestionRow";
 import { StatusBar } from "expo-status-bar";
 import { LocationContext } from "../contexts/LocationContext";
+import Screens from "../constants/Screens";
 
 export const SearchSuggestionScreen = ({ navigation, route }) => {
     const { chooseStartPoint, chooseDestination } = useContext(LocationContext);
     const placeholderText = route.params.placeholderText;
+    const goBackToScreen = route.params.goBackTo;
 
     const handle = (location) => {
         console.log("something");
@@ -26,7 +28,7 @@ export const SearchSuggestionScreen = ({ navigation, route }) => {
         } else {
             chooseStartPoint(location);
         }
-        navigation.navigate("MapScreen");
+        navigation.navigate(Screens.MAP, { goBackTo: goBackToScreen });
     };
     return (
         <SafeAreaView style={styles.container}>
@@ -51,6 +53,7 @@ export const SearchSuggestionScreen = ({ navigation, route }) => {
                         );
                     }}
                     keyExtractor={(item) => item}
+                    keyboardShouldPersistTaps="always"
                 />
             </View>
         </SafeAreaView>

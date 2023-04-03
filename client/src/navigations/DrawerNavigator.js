@@ -5,20 +5,20 @@ import {
     DrawerItemList,
     DrawerItem,
 } from "@react-navigation/drawer";
-
-import { WelcomeScreen } from "../screens/WelcomeScreen";
-import { InterestedPlacesScreen } from "../screens/InterestedPlacesScreen";
-import { MapScreen } from "../screens/MapScreen";
 import {
     SafeAreaView,
     View,
     Text,
     StyleSheet,
     TouchableOpacity,
+    Linking,
 } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 import colors from "../constants/colors";
 import { AuthContext } from "../contexts/AuthContext";
+import Screens from "../constants/Screens";
+import { WelcomeScreen } from "../screens/WelcomeScreen";
+import { InterestedPlacesScreen } from "../screens/InterestedPlacesScreen";
 
 const CustomDrawerMenu = (props) => {
     const { logout } = useContext(AuthContext);
@@ -37,10 +37,13 @@ const CustomDrawerMenu = (props) => {
             </View>
             <DrawerContentScrollView {...props}>
                 <DrawerItemList {...props} />
-                <DrawerItem label="Visit Us" />
+                <DrawerItem
+                    label="Visit Us"
+                    onPress={() => Linking.openURL("https://www.uow.edu.au/")}
+                />
                 <TouchableOpacity
                     onPress={() => {
-                        props.navigation.navigate("LoginScreen");
+                        props.navigation.navigate(Screens.LOGIN);
                     }}
                 >
                     <View style={styles.button}>
@@ -58,24 +61,20 @@ const Drawer = createDrawerNavigator();
 export const DrawerNavigator = () => {
     return (
         <Drawer.Navigator
-            initialRouteName="WelcomeScreen"
+            initialRouteName={Screens.WELCOME}
             drawerContent={(props) => <CustomDrawerMenu {...props} />}
             screenOptions={{
                 drawerPosition: "left",
             }}
         >
             <Drawer.Screen
-                name="WelcomeScreen"
+                name={Screens.WELCOME}
                 component={WelcomeScreen}
                 options={{ headerShown: false }}
             />
+
             <Drawer.Screen
-                name="MapScreen"
-                component={MapScreen}
-                options={{ headerShown: false }}
-            />
-            <Drawer.Screen
-                name="Places of Interest"
+                name={Screens.INTERESTED_PLACE}
                 component={InterestedPlacesScreen}
                 options={{ headerShown: false }}
             />

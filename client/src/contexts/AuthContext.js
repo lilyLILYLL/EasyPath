@@ -3,6 +3,7 @@ import React, { createContext, useReducer } from "react";
 import { auth } from "../config/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import * as RootNavigation from "../navigations/RootNavigation";
+import Screens from "../constants/Screens";
 
 export const AuthContext = createContext();
 
@@ -58,7 +59,7 @@ export const AuthContextProvider = ({ children }) => {
                         isLoading: true,
                     },
                 });
-                RootNavigation.navigate("DrawerNavigator");
+                RootNavigation.navigate(Screens.DRAWER_NAVIGATOR);
             })
             .catch((error) => {
                 const error_code = error.code;
@@ -91,7 +92,7 @@ export const AuthContextProvider = ({ children }) => {
             await auth.signOut();
             dispatch({ type: "log_out" });
             console.log("log out");
-            RootNavigation.navigate("LoginScreen");
+            RootNavigation.navigate(Screens.LOGIN);
         } catch (error) {
             console.log(error);
         }

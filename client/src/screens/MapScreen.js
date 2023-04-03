@@ -12,42 +12,54 @@ import { StatusBar } from "expo-status-bar";
 import { SearchContext } from "../contexts/SearchContext";
 import { SearchBar } from "../components/SearchBar";
 import { LocationContext } from "../contexts/LocationContext";
-import { FontAwesome } from "@expo/vector-icons";
+import { FontAwesome, Ionicons } from "@expo/vector-icons";
+import moment from "moment";
+import Screens from "../constants/Screens";
 
-const DUMMY_DATE = "10/10/2023";
 const DUMMY_TIME = 6;
 
-export const MapScreen = ({ navigation }) => {
-    const { startPoint, destination } = useContext(LocationContext);
+export const MapScreen = ({ navigation, route }) => {
+    const { startPoint, destination, chooseDestination, chooseStartPoint } =
+        useContext(LocationContext);
     const { addRecentSearch } = useContext(SearchContext);
-    console.log({ startPoint, destination });
+    const currentDate = moment().format("DD/MM/YYYY");
+    const params = route.params;
 
     const searchStartPoint = () => {
-        navigation.push("SearchSuggestionScreen", {
+        navigation.push(Screens.SUGGESTION, {
             placeholderText: "Choose Start Point",
             title: "startPoint",
         });
     };
     const searchDestination = () => {
-        navigation.push("SearchSuggestionScreen", {
+        navigation.push(Screens.SUGGESTION, {
             placeholderText: "Choose Destination",
             title: "destination",
         });
     };
 
     const search = (startPoint, destination) => {
-        addRecentSearch(startPoint, destination, DUMMY_DATE, DUMMY_TIME);
-        navigation.navigate("WelcomeScreen");
+        addRecentSearch(startPoint, destination, currentDate, DUMMY_TIME);
+        navigation.navigate(Screens.WELCOME);
     };
 
     return (
         <SafeAreaView>
             <StatusBar />
             <HeadBar
-                header="Search"
+                header="Map View"
                 onPress={() => {
-                    navigation.openDrawer();
+                    chooseStartPoint("Your Location");
+                    chooseDestination("");
+                    navigation.navigate(params.goBackTo);
                 }}
+                icon={
+                    <Ionicons
+                        name="md-chevron-back"
+                        color={colors.white}
+                        size={35}
+                    />
+                }
             />
             <SearchBar
                 placeholderText={"Choose Start Point"}

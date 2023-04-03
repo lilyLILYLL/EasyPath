@@ -1,10 +1,22 @@
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import React from "react";
+import React, { useContext } from "react";
 
 import colors from "../constants/colors";
 import interestedPlaces from "../constants/interestedPlaces";
+import { useNavigation } from "@react-navigation/native";
+import { LocationContext } from "../contexts/LocationContext";
+import Screens from "../constants/Screens";
 
-export const InterestedPlaces = ({ onPress }) => {
+export const InterestedPlaces = () => {
+    const navigation = useNavigation();
+    const { chooseDestination } = useContext(LocationContext);
+
+    const onChooseDestination = (locationName) => {
+        chooseDestination(locationName);
+        navigation.navigate(Screens.MAP, {
+            goBackTo: Screens.INTERESTED_PLACE,
+        });
+    };
     return (
         <View style={styles.container}>
             {interestedPlaces &&
@@ -13,7 +25,7 @@ export const InterestedPlaces = ({ onPress }) => {
                         <LocationItem
                             icon={icon}
                             locationName={location}
-                            onPress={onPress}
+                            onChooseDestination={onChooseDestination}
                             key={index}
                         />
                     );
@@ -22,9 +34,9 @@ export const InterestedPlaces = ({ onPress }) => {
     );
 };
 
-const LocationItem = ({ icon, locationName, onPress }) => {
+const LocationItem = ({ icon, locationName, onChooseDestination }) => {
     return (
-        <TouchableOpacity onPress={onPress}>
+        <TouchableOpacity onPress={() => onChooseDestination(locationName)}>
             <View style={styles.locationItem}>
                 <Text style={styles.icon}>{icon}</Text>
                 <Text style={styles.locationText}>{locationName}</Text>
