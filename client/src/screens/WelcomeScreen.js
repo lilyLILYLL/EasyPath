@@ -17,11 +17,10 @@ export const WelcomeScreen = () => {
     const { recentSearch, fetch } = useContext(SearchContext);
     const isFocused = useIsFocused();
     const currentDate = moment().format("DD/MM/YYYY");
-    console.log(currentDate);
 
     useEffect(() => {
         if (isFocused) {
-            fetch();
+            // fetch();
         }
     }, [isFocused]);
 

@@ -26,6 +26,7 @@ export const SearchContextProvider = ({ children }) => {
     const fetch = () => {
         const db = getDatabase();
         const user = getAuth().currentUser;
+        console.log(user);
         const id = user.uid;
         const searchListRef = ref(db, id);
         // fetch database here and setRecentSearches here

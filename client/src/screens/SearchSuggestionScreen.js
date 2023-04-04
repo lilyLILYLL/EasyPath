@@ -1,11 +1,4 @@
-import {
-    Text,
-    View,
-    SafeAreaView,
-    TouchableOpacity,
-    FlatList,
-    StyleSheet,
-} from "react-native";
+import { Text, View, SafeAreaView, FlatList, StyleSheet } from "react-native";
 import React, { useContext } from "react";
 import { SearchBar } from "../components/SearchBar";
 import colors from "../constants/colors";

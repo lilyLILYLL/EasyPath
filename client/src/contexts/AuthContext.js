@@ -1,5 +1,5 @@
-import { View, Text } from "react-native";
 import React, { createContext, useReducer } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { auth } from "../config/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import * as RootNavigation from "../navigations/RootNavigation";
@@ -7,8 +7,6 @@ import Screens from "../constants/Screens";
 
 export const AuthContext = createContext();
 
-//state:{email, password}
-// action:{type:"login" , payload:{email, password}}
 const reducer = (state, action) => {
     switch (action.type) {
         case "log_in":
@@ -16,21 +14,25 @@ const reducer = (state, action) => {
                 ...state,
                 email: action.payload.email,
                 password: action.payload.password,
-                errorMessage: action.payload.errorMessager,
+                errorMessage: "",
                 isLoading: action.payload.isLoading,
             };
-        case "error":
-            return { ...state, errorMessage: action.payload, isLoading: true };
         case "stop_loading":
             return { ...state, isLoading: false };
         case "log_out":
             return {
-                ...state,
                 email: "",
                 password: "",
                 errorMessage: "",
                 isLoading: false,
             };
+        case "auth/invalid-email":
+            return { ...state, errorMessage: "Valid Email Required!" };
+        case "auth/wrong-password":
+            return { ...state, errorMessage: "Password is NOT Correct!" };
+        case "auth/user-not-found":
+            return { ...state, errorMessage: "Email is NOT Found!" };
+
         default:
             return state;
     }
@@ -48,56 +50,51 @@ export const AuthContextProvider = ({ children }) => {
 
     const login = async (email, password) => {
         await signInWithEmailAndPassword(auth, email, password)
-            .then((res) => {
-                console.log(res);
+            .then(async (res) => {
+                await AsyncStorage.setItem("email", email);
+                await AsyncStorage.setItem("password", password);
                 dispatch({
                     type: "log_in",
-                    payload: {
-                        email,
-                        password,
-                        errorMessage: "",
-                        isLoading: true,
-                    },
+                    payload: { email, password, isLoading: true },
                 });
                 RootNavigation.navigate(Screens.DRAWER_NAVIGATOR);
             })
             .catch((error) => {
                 const error_code = error.code;
-                console.log(error_code);
-                if (error_code === "auth/invalid-email") {
-                    dispatch({
-                        type: "error",
-                        payload: "Valid Email Required!",
-                    });
-                }
-                if (error_code === "auth/user-not-found") {
-                    dispatch({
-                        type: "error",
-                        payload: "Email is NOT Found!",
-                    });
-                }
-                if (error_code === "auth/wrong-password") {
-                    dispatch({
-                        type: "error",
-                        payload: "Password is NOT Correct!",
-                    });
-                }
+                dispatch({ type: error_code });
             })
             .finally(() => {
+                console.log("stop_loading");
                 dispatch({ type: "stop_loading" });
             });
     };
+
     const logout = async () => {
         try {
             await auth.signOut();
+            await AsyncStorage.clear();
             dispatch({ type: "log_out" });
-            console.log("log out");
             RootNavigation.navigate(Screens.LOGIN);
         } catch (error) {
-            console.log(error);
+            console.log(error.message);
         }
     };
-    const authContextValue = { login, logout, state };
+
+    const tryLocalSignin = async () => {
+        const email = await AsyncStorage.getItem("email");
+        const password = await AsyncStorage.getItem("password");
+
+        if (email && password) {
+            dispatch({
+                type: "log_in",
+                payload: { email, password, isLoading: false },
+            });
+            RootNavigation.navigate(Screens.DRAWER_NAVIGATOR);
+        }
+    };
+
+    const authContextValue = { login, logout, state, tryLocalSignin };
+
     return (
         <AuthContext.Provider value={authContextValue}>
             {children}

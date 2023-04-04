@@ -8,20 +8,29 @@ import {
     View,
 } from "react-native";
 
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useContext, useEffect } from "react";
 import { HeadBar } from "../components/HeadBar";
 import { LoginForm } from "../components/LoginForm";
 import colors from "../constants/colors";
 import { KeyBoardSpacer } from "../components/KeyBoardSpacer";
 import { Logo } from "../components/Logo";
+import { AuthContext } from "../contexts/AuthContext";
+import { useIsFocused } from "@react-navigation/native";
 
 export const LoginScreen = ({ navigation }) => {
     const [keyBoardEnabled, setKeyBoardEnabled] = useState(false);
+    const { tryLocalSignin } = useContext(AuthContext);
+    const isFocused = useIsFocused();
 
     const scroll_ref = useRef(null);
+
     const handleContentSizeChange = () => {
         scroll_ref.current.scrollToEnd({ animated: true });
     };
+
+    useEffect(() => {
+        tryLocalSignin();
+    }, []);
 
     return (
         <SafeAreaView style={styles.container}>
@@ -42,7 +51,7 @@ export const LoginScreen = ({ navigation }) => {
                     <View style={styles.underline} />
                 </View>
 
-                <LoginForm navigation={navigation} />
+                <LoginForm />
 
                 <KeyBoardSpacer
                     onToggle={(keyBoardEnabled) => {

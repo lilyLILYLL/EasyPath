@@ -13,10 +13,10 @@ import { Ionicons } from "@expo/vector-icons";
 import { ButtonForm } from "../components/ButtonForm";
 import { CheckBoxButton } from "../components/CheckBoxButton";
 import { AuthContext } from "../contexts/AuthContext";
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
 const screen = Dimensions.get("window");
 
-export const LoginForm = ({ navigation }) => {
+export const LoginForm = () => {
     const [securePassword, setSecurePassword] = useState(true);
     const password_ref = useRef();
     const [email, setEmail] = useState("");

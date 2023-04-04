@@ -41,16 +41,8 @@ const CustomDrawerMenu = (props) => {
                     label="Visit Us"
                     onPress={() => Linking.openURL("https://www.uow.edu.au/")}
                 />
-                <TouchableOpacity
-                    onPress={() => {
-                        props.navigation.navigate(Screens.LOGIN);
-                    }}
-                >
-                    <View style={styles.button}>
-                        <Text style={styles.buttonText} onPress={logout}>
-                            Log Out
-                        </Text>
-                    </View>
+                <TouchableOpacity onPress={logout} style={styles.button}>
+                    <Text style={styles.buttonText}>Log Out</Text>
                 </TouchableOpacity>
             </DrawerContentScrollView>
         </SafeAreaView>
