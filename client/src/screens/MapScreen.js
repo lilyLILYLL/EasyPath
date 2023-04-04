@@ -4,11 +4,11 @@ import {
     View,
     SafeAreaView,
     TouchableOpacity,
+    StatusBar,
 } from "react-native";
 import React, { useState, useRef, useContext } from "react";
 import { HeadBar } from "../components/HeadBar";
 import colors from "../constants/colors";
-import { StatusBar } from "expo-status-bar";
 import { SearchContext } from "../contexts/SearchContext";
 import { SearchBar } from "../components/SearchBar";
 import { LocationContext } from "../contexts/LocationContext";

@@ -1,17 +1,27 @@
-import { StyleSheet, Text, View, Dimensions, Keyboard } from "react-native";
+import {
+    StyleSheet,
+    Text,
+    View,
+    Dimensions,
+    Keyboard,
+    Platform,
+} from "react-native";
 import React, { useEffect, useState } from "react";
 
 export const KeyBoardSpacer = ({ onToggle }) => {
     const [keyBoardSpacer, setKeyBoardSpacer] = useState(0);
 
     useEffect(() => {
-        const actualHeight = Dimensions.get("window").height;
-
         const keyBoardShow = Keyboard.addListener(
             "keyboardDidShow",
             (event) => {
                 const keyBoardHeight = event.endCoordinates.height;
-                setKeyBoardSpacer(keyBoardHeight);
+                if (Platform.OS === "ios") {
+                    setKeyBoardSpacer(keyBoardHeight);
+                } else if (Platform.OS === "android") {
+                    setKeyBoardSpacer(1);
+                }
+
                 onToggle(true);
             }
         );

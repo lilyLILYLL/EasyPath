@@ -19,7 +19,6 @@ const styles = StyleSheet.create({
         backgroundColor: colors.blue,
         padding: 20,
         flexDirection: "row",
-        borderRadius: 5,
     },
 
     header: {

@@ -8,7 +8,7 @@ import { LoginScreen } from "../screens/LoginScreen";
 import { DrawerNavigator } from "../navigations/DrawerNavigator";
 import { MapScreen } from "../screens/MapScreen";
 import { SearchSuggestionScreen } from "../screens/SearchSuggestionScreen";
-
+import { LoadingScreen } from "../screens/LoadingScreen";
 import { navigationRef } from "./RootNavigation";
 import Screens from "../constants/Screens";
 const MainStack = createNativeStackNavigator();
@@ -18,7 +18,12 @@ export const Navigation = () => {
             <SearchContextProvider>
                 <LocationContextProvider>
                     <NavigationContainer ref={navigationRef}>
-                        <MainStack.Navigator initialRouteName={Screens.LOGIN}>
+                        <MainStack.Navigator initialRouteName={Screens.LOADING}>
+                            <MainStack.Screen
+                                name={Screens.LOADING}
+                                component={LoadingScreen}
+                                options={{ headerShown: false }}
+                            />
                             <MainStack.Screen
                                 name={Screens.LOGIN}
                                 component={LoginScreen}

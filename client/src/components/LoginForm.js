@@ -7,21 +7,30 @@ import {
     TouchableOpacity,
     ActivityIndicator,
 } from "react-native";
-import React, { useState, useRef, useContext } from "react";
+import React, { useState, useRef, useContext, useEffect } from "react";
 import colors from "../constants/colors";
 import { Ionicons } from "@expo/vector-icons";
 import { ButtonForm } from "../components/ButtonForm";
 import { CheckBoxButton } from "../components/CheckBoxButton";
 import { AuthContext } from "../contexts/AuthContext";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+
 const screen = Dimensions.get("window");
 
 export const LoginForm = () => {
     const [securePassword, setSecurePassword] = useState(true);
     const password_ref = useRef();
+
+    const { login, state, logout } = useContext(AuthContext);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const { login, state, logout } = useContext(AuthContext);
+    useEffect(() => {
+        setEmail(state.email || email);
+        setPassword(state.password || password);
+    }, [state]);
+
+    const handleSubmitEmail = () => {
+        password_ref.current.focus();
+    };
 
     return (
         <View style={styles.inputContainer}>
@@ -33,6 +42,7 @@ export const LoginForm = () => {
                 value={email}
                 onChangeText={setEmail}
                 onSubmitEditing={() => password_ref.current.focus()}
+                blurOnSubmit={false}
             />
             <View style={[styles.input, styles.passwordContainer]}>
                 <TextInput
@@ -67,14 +77,14 @@ export const LoginForm = () => {
             </View>
 
             <CheckBoxButton text="Remember me" />
+
             {state.isLoading ? (
-                <ActivityIndicator size="large" color="#0000ff" />
-            ) : null}
-            {state.errorMessage ? (
+                <ActivityIndicator size="large" color={colors.blue} />
+            ) : state.errorMessage ? (
                 <Text style={styles.errorMessage}>{state.errorMessage}</Text>
             ) : null}
             <ButtonForm
-                buttonText="Log In"
+                buttonText={state.isLoading ? "Loading..." : "Log In"}
                 toggle={true}
                 onPress={() => {
                     login(email, password);

@@ -1,10 +1,17 @@
-import { StyleSheet, Text, View, SafeAreaView, ScrollView } from "react-native";
+import {
+    StyleSheet,
+    Text,
+    View,
+    SafeAreaView,
+    ScrollView,
+    StatusBar,
+} from "react-native";
 import React, { useContext, useEffect } from "react";
 import { HeadBar } from "../components/HeadBar";
 import { SearchBar } from "../components/SearchBar";
 import colors from "../constants/colors.js";
 import { RecentSearchItem } from "../components/RecentSearchItem";
-import { StatusBar } from "expo-status-bar";
+
 import { useNavigation, DrawerActions } from "@react-navigation/native";
 import { Logo } from "../components/Logo";
 import { SearchContext } from "../contexts/SearchContext";
@@ -89,7 +96,9 @@ export const WelcomeScreen = () => {
 };
 
 const styles = StyleSheet.create({
-    container: {},
+    container: {
+        flex: 1,
+    },
     logoView: {
         flexDirection: "row",
         justifyContent: "space-between",

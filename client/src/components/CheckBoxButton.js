@@ -1,17 +1,18 @@
 import CheckBox from "expo-checkbox";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import colors from "../constants/colors";
+import { AuthContext } from "../contexts/AuthContext";
 
 export const CheckBoxButton = ({ text }) => {
-    const [isSelected, setSelection] = useState(true);
+    const { state, toggleRememberMe } = useContext(AuthContext);
     return (
         <TouchableOpacity>
             <View style={styles.checkbox}>
                 <CheckBox
-                    value={isSelected}
-                    onValueChange={setSelection}
-                    color={isSelected ? colors.blue : undefined}
+                    value={state.rememberMe}
+                    onValueChange={(value) => toggleRememberMe(value)}
+                    color={state.rememberMe ? colors.blue : undefined}
                 />
                 <Text
                     style={styles.text}

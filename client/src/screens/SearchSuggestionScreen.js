@@ -1,11 +1,18 @@
-import { Text, View, SafeAreaView, FlatList, StyleSheet } from "react-native";
+import {
+    Text,
+    View,
+    SafeAreaView,
+    FlatList,
+    StyleSheet,
+    StatusBar,
+} from "react-native";
 import React, { useContext } from "react";
 import { SearchBar } from "../components/SearchBar";
 import colors from "../constants/colors";
 import buildings from "../constants/buildings";
 import { Ionicons } from "@expo/vector-icons";
 import { SuggestionRow } from "../components/SuggestionRow";
-import { StatusBar } from "expo-status-bar";
+
 import { LocationContext } from "../contexts/LocationContext";
 import Screens from "../constants/Screens";
 

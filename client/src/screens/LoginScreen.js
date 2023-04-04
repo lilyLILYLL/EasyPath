@@ -14,12 +14,10 @@ import { LoginForm } from "../components/LoginForm";
 import colors from "../constants/colors";
 import { KeyBoardSpacer } from "../components/KeyBoardSpacer";
 import { Logo } from "../components/Logo";
-import { AuthContext } from "../contexts/AuthContext";
 import { useIsFocused } from "@react-navigation/native";
 
 export const LoginScreen = ({ navigation }) => {
     const [keyBoardEnabled, setKeyBoardEnabled] = useState(false);
-    const { tryLocalSignin } = useContext(AuthContext);
     const isFocused = useIsFocused();
 
     const scroll_ref = useRef(null);
@@ -28,13 +26,9 @@ export const LoginScreen = ({ navigation }) => {
         scroll_ref.current.scrollToEnd({ animated: true });
     };
 
-    useEffect(() => {
-        tryLocalSignin();
-    }, []);
-
     return (
         <SafeAreaView style={styles.container}>
-            <StatusBar barStyle="dark-content" />
+            <StatusBar />
             <HeadBar header="Log In" />
             <ScrollView
                 keyboardShouldPersistTaps="always"
