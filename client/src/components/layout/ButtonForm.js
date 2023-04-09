@@ -6,7 +6,7 @@ import {
     TouchableOpacity,
 } from "react-native";
 import React from "react";
-import colors from "../constants/colors";
+import colors from "../../constants/colors";
 
 const screen = Dimensions.get("window");
 export const ButtonForm = ({ buttonText, toggle, onPress }) => {

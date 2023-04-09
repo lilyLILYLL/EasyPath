@@ -5,28 +5,32 @@ import {
     TextInput,
     Dimensions,
     TouchableOpacity,
-    ActivityIndicator,
 } from "react-native";
 import React, { useState, useRef, useContext, useEffect } from "react";
 import colors from "../constants/colors";
 import { Ionicons } from "@expo/vector-icons";
-import { ButtonForm } from "../components/ButtonForm";
 import { CheckBoxButton } from "../components/CheckBoxButton";
 import { AuthContext } from "../contexts/AuthContext";
+import Screens from "../constants/Screens";
+import { useNavigation } from "@react-navigation/native";
+import { LoadingIcon } from "./layout/LoadingIcon";
+import { ButtonForm } from "./layout/ButtonForm";
 
 const screen = Dimensions.get("window");
 
 export const LoginForm = () => {
+    const navigation = useNavigation();
     const [securePassword, setSecurePassword] = useState(true);
     const password_ref = useRef();
 
-    const { login, state, logout } = useContext(AuthContext);
+    const { login, state } = useContext(AuthContext);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+
     useEffect(() => {
         setEmail(state.email || email);
         setPassword(state.password || password);
-    }, [state]);
+    }, []);
 
     const handleSubmitEmail = () => {
         password_ref.current.focus();
@@ -54,6 +58,9 @@ export const LoginForm = () => {
                     onChangeText={setPassword}
                     autoCorrect={false}
                     style={{ fontSize: 20, flex: 1 }}
+                    returnKeyType="go"
+                    onSubmitEditing={() => login(email, password)}
+                    blurOnSubmit={false}
                 />
                 <TouchableOpacity
                     onPress={() => {
@@ -79,7 +86,7 @@ export const LoginForm = () => {
             <CheckBoxButton text="Remember me" />
 
             {state.isLoading ? (
-                <ActivityIndicator size="large" color={colors.blue} />
+                <LoadingIcon />
             ) : state.errorMessage ? (
                 <Text style={styles.errorMessage}>{state.errorMessage}</Text>
             ) : null}
@@ -94,7 +101,9 @@ export const LoginForm = () => {
                 buttonText="Login as Guest"
                 toggle={false}
                 onPress={() => {
-                    // navigation.push("DrawerNavigator");
+                    navigation.navigate(Screens.MAP, {
+                        goBackTo: Screens.LOGIN,
+                    });
                 }}
             />
         </View>

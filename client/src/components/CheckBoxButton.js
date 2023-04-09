@@ -7,19 +7,14 @@ import { AuthContext } from "../contexts/AuthContext";
 export const CheckBoxButton = ({ text }) => {
     const { state, toggleRememberMe } = useContext(AuthContext);
     return (
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => toggleRememberMe(!state.rememberMe)}>
             <View style={styles.checkbox}>
                 <CheckBox
                     value={state.rememberMe}
                     onValueChange={(value) => toggleRememberMe(value)}
                     color={state.rememberMe ? colors.blue : undefined}
                 />
-                <Text
-                    style={styles.text}
-                    onPress={() => setSelection(!isSelected)}
-                >
-                    {text}
-                </Text>
+                <Text style={styles.text}>{text}</Text>
             </View>
         </TouchableOpacity>
     );

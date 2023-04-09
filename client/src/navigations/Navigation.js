@@ -10,6 +10,7 @@ import { MapScreen } from "../screens/MapScreen";
 import { SearchSuggestionScreen } from "../screens/SearchSuggestionScreen";
 import { LoadingScreen } from "../screens/LoadingScreen";
 import { navigationRef } from "./RootNavigation";
+import { RecentSearchScreen } from "../screens/RecentSearchScreen";
 import Screens from "../constants/Screens";
 const MainStack = createNativeStackNavigator();
 export const Navigation = () => {
@@ -43,6 +44,11 @@ export const Navigation = () => {
                             <MainStack.Screen
                                 name={Screens.SUGGESTION}
                                 component={SearchSuggestionScreen}
+                                options={{ headerShown: false }}
+                            />
+                            <MainStack.Screen
+                                name={Screens.RECENT_SEARCH}
+                                component={RecentSearchScreen}
                                 options={{ headerShown: false }}
                             />
                         </MainStack.Navigator>

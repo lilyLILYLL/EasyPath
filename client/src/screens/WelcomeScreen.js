@@ -7,29 +7,27 @@ import {
     StatusBar,
 } from "react-native";
 import React, { useContext, useEffect } from "react";
-import { HeadBar } from "../components/HeadBar";
-import { SearchBar } from "../components/SearchBar";
+import { HeadBar } from "../components/layout/HeadBar";
+import { SearchBar } from "../components/layout/SearchBar";
 import colors from "../constants/colors.js";
 import { RecentSearchItem } from "../components/RecentSearchItem";
-
-import { useNavigation, DrawerActions } from "@react-navigation/native";
-import { Logo } from "../components/Logo";
+import { useNavigation } from "@react-navigation/native";
+import { Logo } from "../components/layout/Logo";
 import { SearchContext } from "../contexts/SearchContext";
-import { useIsFocused } from "@react-navigation/native";
-import { Entypo } from "@expo/vector-icons";
 import moment from "moment";
 import Screens from "../constants/Screens";
+import { LoadingIcon } from "../components/layout/LoadingIcon";
+import { MenuIcon } from "../components/layout/Icons";
+import { ButtonForm } from "../components/layout/ButtonForm";
+
 export const WelcomeScreen = () => {
     const navigation = useNavigation();
-    const { recentSearch, fetch } = useContext(SearchContext);
-    const isFocused = useIsFocused();
+    const { state, fetch } = useContext(SearchContext);
     const currentDate = moment().format("DD/MM/YYYY");
 
     useEffect(() => {
-        if (isFocused) {
-            // fetch();
-        }
-    }, [isFocused]);
+        fetch();
+    }, []);
 
     const toggleDrawer = () => {
         navigation.openDrawer();
@@ -48,14 +46,7 @@ export const WelcomeScreen = () => {
             <HeadBar
                 header="Welcome John Doe"
                 onPress={toggleDrawer}
-                icon={
-                    <Entypo
-                        name="menu"
-                        size={35}
-                        color={colors.white}
-                        style={styles.icon}
-                    />
-                }
+                icon={<MenuIcon />}
             />
             <SearchBar
                 onPress={showSuggestionList}
@@ -74,9 +65,13 @@ export const WelcomeScreen = () => {
                     <View style={styles.seperator}></View>
 
                     <ScrollView>
-                        {recentSearch &&
-                            recentSearch.map(
-                                ({ from, to, date, time }, index) => {
+                        {state.isLoading ? (
+                            <LoadingIcon />
+                        ) : (
+                            state.recentSearch &&
+                            state.recentSearch
+                                .slice(0, 9)
+                                .map(({ from, to, date, time }, index) => {
                                     return (
                                         <RecentSearchItem
                                             startLocation={from}
@@ -86,8 +81,14 @@ export const WelcomeScreen = () => {
                                             key={index}
                                         />
                                     );
-                                }
-                            )}
+                                })
+                        )}
+                        <ButtonForm
+                            buttonText="More searches"
+                            onPress={() =>
+                                navigation.navigate(Screens.RECENT_SEARCH)
+                            }
+                        />
                     </ScrollView>
                 </View>
             </View>
@@ -125,5 +126,6 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         marginHorizontal: 25,
         borderRadius: 5,
+        marginVertical: 10,
     },
 });

@@ -6,15 +6,16 @@ import {
     TouchableOpacity,
     StatusBar,
 } from "react-native";
-import React, { useState, useRef, useContext } from "react";
-import { HeadBar } from "../components/HeadBar";
+import React, { useContext } from "react";
+import { HeadBar } from "../components/layout/HeadBar";
 import colors from "../constants/colors";
 import { SearchContext } from "../contexts/SearchContext";
-import { SearchBar } from "../components/SearchBar";
+import { SearchBar } from "../components/layout/SearchBar";
 import { LocationContext } from "../contexts/LocationContext";
 import { FontAwesome, Ionicons } from "@expo/vector-icons";
 import moment from "moment";
 import Screens from "../constants/Screens";
+import { GoBackIcon } from "../components/layout/Icons";
 
 const DUMMY_TIME = 6;
 
@@ -23,24 +24,27 @@ export const MapScreen = ({ navigation, route }) => {
         useContext(LocationContext);
     const { addRecentSearch } = useContext(SearchContext);
     const currentDate = moment().format("DD/MM/YYYY");
+
     const params = route.params;
 
     const searchStartPoint = () => {
         navigation.push(Screens.SUGGESTION, {
             placeholderText: "Choose Start Point",
             title: "startPoint",
+            goBackTo: params.goBackTo,
         });
     };
     const searchDestination = () => {
         navigation.push(Screens.SUGGESTION, {
             placeholderText: "Choose Destination",
             title: "destination",
+            goBackTo: params.goBackTo,
         });
     };
 
     const search = (startPoint, destination) => {
         addRecentSearch(startPoint, destination, currentDate, DUMMY_TIME);
-        navigation.navigate(Screens.WELCOME);
+        // map show up
     };
 
     return (
@@ -53,13 +57,7 @@ export const MapScreen = ({ navigation, route }) => {
                     chooseDestination("");
                     navigation.navigate(params.goBackTo);
                 }}
-                icon={
-                    <Ionicons
-                        name="md-chevron-back"
-                        color={colors.white}
-                        size={35}
-                    />
-                }
+                icon={<GoBackIcon />}
             />
             <SearchBar
                 placeholderText={"Choose Start Point"}
@@ -81,7 +79,16 @@ export const MapScreen = ({ navigation, route }) => {
                     <Text style={styles.buttonText}>Start</Text>
                 </View>
             </TouchableOpacity>
-            <Text style={styles.text}> Map View Here</Text>
+            <View style={styles.mapView}>
+                {startPoint && destination ? (
+                    <>
+                        <Text style={styles.text}> From : {startPoint}</Text>
+                        <Text style={styles.text}> To : {destination}</Text>
+                    </>
+                ) : (
+                    <Text style={styles.text}> Map View here</Text>
+                )}
+            </View>
         </SafeAreaView>
     );
 };
@@ -114,8 +121,7 @@ const styles = StyleSheet.create({
     },
     mapView: {
         height: 600,
-        justifyContent: "center",
-        alignItems: "center",
+        borderRadius: 10,
     },
     mapText: {
         fontWeight: "bold",

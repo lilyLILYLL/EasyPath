@@ -8,8 +8,8 @@ import {
 } from "react-native";
 import React from "react";
 import { AntDesign, Ionicons } from "@expo/vector-icons";
-import colors from "../constants/colors";
 import { Entypo } from "@expo/vector-icons";
+import colors from "../../constants/colors";
 
 export const SearchBar = ({
     onPress,

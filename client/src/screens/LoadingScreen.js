@@ -1,21 +1,12 @@
-import {
-    Text,
-    View,
-    SafeAreaView,
-    StyleSheet,
-    ActivityIndicator,
-} from "react-native";
+import { Text, View, SafeAreaView, StyleSheet } from "react-native";
 import React, { useState, useEffect, useContext } from "react";
 import { StatusBarForm } from "../components/layout/StatusBarForm";
-import { Logo } from "../components/Logo";
-import Screens from "../constants/Screens";
-import { useIsFocused } from "@react-navigation/native";
-import colors from "../constants/colors";
+import { Logo } from "../components/layout/Logo";
 import { AuthContext } from "../contexts/AuthContext";
+import { LoadingIcon } from "../components/layout/LoadingIcon";
 
 export const LoadingScreen = ({ navigation }) => {
     const [isLoading, setIsLoading] = useState(true);
-    const isFocused = useIsFocused();
     const { tryLocalSignin } = useContext(AuthContext);
 
     const handleLoading = () => {
@@ -34,9 +25,7 @@ export const LoadingScreen = ({ navigation }) => {
             <View style={styles.logo}>
                 <Logo size={1 / 1.5} />
             </View>
-            {isLoading ? (
-                <ActivityIndicator size="large" color={colors.blue} />
-            ) : null}
+            {isLoading ? <LoadingIcon /> : null}
         </SafeAreaView>
     );
 };

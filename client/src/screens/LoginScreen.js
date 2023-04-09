@@ -9,16 +9,14 @@ import {
 } from "react-native";
 
 import React, { useRef, useState, useContext, useEffect } from "react";
-import { HeadBar } from "../components/HeadBar";
+import { HeadBar } from "../components/layout/HeadBar";
 import { LoginForm } from "../components/LoginForm";
 import colors from "../constants/colors";
-import { KeyBoardSpacer } from "../components/KeyBoardSpacer";
-import { Logo } from "../components/Logo";
-import { useIsFocused } from "@react-navigation/native";
+import { KeyBoardSpacer } from "../components/layout/KeyBoardSpacer";
+import { Logo } from "../components/layout/Logo";
 
 export const LoginScreen = ({ navigation }) => {
     const [keyBoardEnabled, setKeyBoardEnabled] = useState(false);
-    const isFocused = useIsFocused();
 
     const scroll_ref = useRef(null);
 

@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import colors from "../constants/colors";
-import { SimpleLineIcons } from "@expo/vector-icons";
+import { SimpleLineIcons, Entypo } from "@expo/vector-icons";
 export const RecentSearchItem = ({
     startLocation,
     destination,
@@ -13,10 +13,10 @@ export const RecentSearchItem = ({
             <View style={styles.row}>
                 <SimpleLineIcons name="clock" size={40} color={colors.red} />
                 <View style={styles.content}>
-                    <Text style={styles.text}>From:</Text>
-                    <Text style={styles.text}>To:</Text>
-                    <Text style={styles.text}>Date: </Text>
-                    <Text style={styles.text}>Time: </Text>
+                    <Text style={styles.label}>From:</Text>
+                    <Text style={styles.label}>To:</Text>
+                    <Text style={styles.label}>Date: </Text>
+                    <Text style={styles.label}>Time: </Text>
                 </View>
                 <View>
                     <Text style={styles.text}>{startLocation}</Text>
@@ -44,12 +44,18 @@ const styles = StyleSheet.create({
         alignItems: "center",
     },
     content: {
-        marginLeft: 25,
-        marginRight: 15,
+        marginLeft: 15,
+        marginRight: 10,
     },
     text: {
         color: colors.blue,
-        fontSize: 17,
+        fontSize: 16,
+        marginBottom: 4,
+    },
+    label: {
+        fontSize: 16,
+        fontWeight: "bold",
+        color: colors.blue,
         marginBottom: 4,
     },
 });

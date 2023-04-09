@@ -7,10 +7,9 @@ import {
     StatusBar,
 } from "react-native";
 import React, { useContext } from "react";
-import { SearchBar } from "../components/SearchBar";
+import { SearchBar } from "../components/layout/SearchBar";
 import colors from "../constants/colors";
 import buildings from "../constants/buildings";
-import { Ionicons } from "@expo/vector-icons";
 import { SuggestionRow } from "../components/SuggestionRow";
 
 import { LocationContext } from "../contexts/LocationContext";

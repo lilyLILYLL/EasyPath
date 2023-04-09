@@ -1,6 +1,6 @@
 import React, { createContext, useReducer, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { auth } from "../config/firebase";
+import { auth } from "../../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import * as RootNavigation from "../navigations/RootNavigation";
 import Screens from "../constants/Screens";
@@ -56,7 +56,6 @@ export const AuthContextProvider = ({ children }) => {
         isLoading: false,
         rememberMe: true,
     });
-    console.log(state);
 
     useEffect(() => {
         getRememberUser();
@@ -64,11 +63,13 @@ export const AuthContextProvider = ({ children }) => {
 
     const login = async (email, password) => {
         dispatch({ type: "is_loading" });
+
         await signInWithEmailAndPassword(auth, email, password)
             .then(async (res) => {
                 // setItem for auto local signinh
                 await AsyncStorage.setItem("email", email);
                 await AsyncStorage.setItem("password", password);
+                await AsyncStorage.setItem("token", res.user.uid);
 
                 // update state
                 dispatch({
@@ -90,7 +91,6 @@ export const AuthContextProvider = ({ children }) => {
                 dispatch({ type: error_code });
             })
             .finally(() => {
-                console.log("stop_loading");
                 dispatch({ type: "stop_loading" });
             });
     };
@@ -99,10 +99,12 @@ export const AuthContextProvider = ({ children }) => {
         try {
             await auth.signOut();
             await AsyncStorage.removeItem("email");
+            await AsyncStorage.removeItem("password");
+            await AsyncStorage.removeItem("token");
             dispatch({ type: "log_out" });
             RootNavigation.navigate(Screens.LOGIN);
         } catch (error) {
-            console.log(error.message);
+            return new Error(error.message);
         }
     };
 
@@ -126,7 +128,6 @@ export const AuthContextProvider = ({ children }) => {
             await AsyncStorage.setItem("YOUR-EMAIL", email);
             await AsyncStorage.setItem("YOUR-PASSWORD", password);
         } catch (err) {
-            console.log(err.message);
             throw new Error(err.message);
         }
     };
@@ -135,8 +136,6 @@ export const AuthContextProvider = ({ children }) => {
         try {
             const email = await AsyncStorage.getItem("YOUR-EMAIL");
             const password = await AsyncStorage.getItem("YOUR-PASSWORD");
-            console.log(email);
-            console.log(password);
             if (!email) {
                 dispatch({ type: "toggle_rememberMe", payload: false });
             }
@@ -144,7 +143,6 @@ export const AuthContextProvider = ({ children }) => {
                 dispatch({ type: "auto_fill", payload: { email, password } });
             }
         } catch (err) {
-            console.log(err.message);
             throw new Error(err.message);
         }
     };
@@ -155,7 +153,6 @@ export const AuthContextProvider = ({ children }) => {
             await AsyncStorage.removeItem("YOUR-PASSWORD");
             dispatch({ type: "toggle_rememberMe", payload: false });
         } catch (err) {
-            console.log(err.message);
             throw new Error(err.message);
         }
     };

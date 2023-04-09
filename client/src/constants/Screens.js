@@ -6,4 +6,5 @@ export default {
     MAP: "Map Screen",
     SUGGESTION: "Search Suggestion Screen",
     WELCOME: "Welcome Screen",
+    RECENT_SEARCH: "Recent Search Screen",
 };

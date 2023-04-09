@@ -1,19 +1,40 @@
-import { StyleSheet, Text, View } from "react-native";
-import React, { createContext, useState } from "react";
+import { StyleSheet } from "react-native";
+import React, { createContext, useReducer } from "react";
 import { getDatabase, ref, set, push, onValue } from "firebase/database";
-import { getAuth } from "firebase/auth";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
+const reducer = (state, action) => {
+    switch (action.type) {
+        case "fetch":
+            return { ...state, recentSearch: action.payload, isLoading: false };
+        case "add":
+            return {
+                ...state,
+                recentSearch: [action.payload, ...state.recentSearch],
+            };
+        case "is_loading":
+            return { ...state, isLoading: true };
+        case "stop_loading":
+            return { ...state, isLoading: false };
+        default:
+            return state;
+    }
+};
 export const SearchContext = createContext();
-export const SearchContextProvider = ({ children }) => {
-    const [recentSearch, setRecentSearch] = useState([]);
 
-    const addRecentSearch = (from, to, date, time) => {
-        const user = getAuth().currentUser;
-        if (user) {
-            const db = getDatabase();
-            const id = user.uid;
+export const SearchContextProvider = ({ children }) => {
+    const [state, dispatch] = useReducer(reducer, {
+        recentSearch: [],
+        isLoading: false,
+    });
+
+    // adding a new recent search into database
+    const addRecentSearch = async (from, to, date, time) => {
+        // add a new search into database
+        const db = getDatabase();
+        const id = await AsyncStorage.getItem("token");
+        if (id) {
             const searchListRef = ref(db, id);
-            console.log(searchListRef);
             const newSeacrRef = push(searchListRef);
             set(newSeacrRef, {
                 from: from,
@@ -22,29 +43,40 @@ export const SearchContextProvider = ({ children }) => {
                 time: time,
             });
         }
+        // update recent search state
+        dispatch({ type: "add", payload: { id: id, from, to, date, time } });
     };
-    const fetch = () => {
+
+    // fetch database
+    const fetch = async () => {
+        dispatch({ type: "is_loading" });
         const db = getDatabase();
-        const user = getAuth().currentUser;
-        console.log(user);
-        const id = user.uid;
-        const searchListRef = ref(db, id);
-        // fetch database here and setRecentSearches here
+        const id = await AsyncStorage.getItem("token");
+        if (id) {
+            const searchListRef = ref(db, id);
+            // fetch database here and setRecentSearches here
+            onValue(searchListRef, (snapshot) => {
+                const data = snapshot.val();
+                var dataArray = Object.keys(data).map((id) => {
+                    return {
+                        id: id,
+                        from: data[id].from,
+                        to: data[id].to,
+                        date: data[id].date,
+                        time: data[id].time,
+                    };
+                });
+
+                dispatch({ type: "fetch", payload: dataArray.reverse() });
+            });
+        }
     };
 
-    const addSearch = ({ startPoint, destination }) => {
-        setRecentSearch([
-            {
-                from: startPoint,
-                to: destination,
-                date: DUMMY_DATE,
-                time: DUMMY_TIME,
-            },
-            ...recentSearch,
-        ]);
+    const contextValue = {
+        state,
+        addRecentSearch,
+        fetch,
     };
-
-    const contextValue = { recentSearch, addRecentSearch, fetch };
 
     return (
         <SearchContext.Provider value={contextValue}>
