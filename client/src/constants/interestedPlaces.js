@@ -10,7 +10,7 @@ import colors from "./colors";
 
 const styles = StyleSheet.create({
     icon: {
-        fontSize: 30,
+        fontSize: 40,
         color: colors.blue,
     },
 });

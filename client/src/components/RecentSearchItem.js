@@ -11,7 +11,12 @@ export const RecentSearchItem = ({
     return (
         <View style={styles.container}>
             <View style={styles.row}>
-                <SimpleLineIcons name="clock" size={40} color={colors.red} />
+                <SimpleLineIcons
+                    name="clock"
+                    size={40}
+                    color={colors.red}
+                    style={styles.icon}
+                />
                 <View style={styles.content}>
                     <Text style={styles.label}>From:</Text>
                     <Text style={styles.label}>To:</Text>
@@ -38,14 +43,18 @@ const styles = StyleSheet.create({
         borderBottomColor: colors.blue,
         borderBottomWidth: 0.5,
     },
+
     row: {
         marginVertical: 15,
         flexDirection: "row",
         alignItems: "center",
     },
+    icon: {
+        marginHorizontal: 10,
+    },
     content: {
         marginLeft: 15,
-        marginRight: 10,
+        marginRight: 20,
     },
     text: {
         color: colors.blue,

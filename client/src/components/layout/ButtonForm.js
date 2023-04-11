@@ -27,18 +27,26 @@ export const ButtonForm = ({ buttonText, toggle, onPress }) => {
 
 const styles = StyleSheet.create({
     container: {
-        height: screen.height * 0.07,
+        height: screen.height * 0.08,
         width: screen.width * 0.9,
         backgroundColor: colors.blue,
-        marginVertical: 10,
+        marginVertical: 7,
         alignSelf: "center",
-        borderRadius: 5,
+        borderRadius: 25,
         alignContent: "center",
         justifyContent: "center",
+        shadowColor: colors.shadowColor,
+        shadowOffset: {
+            width: 1,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5, // Set elevation to make it work on Android
     },
     text: {
         color: colors.white,
         alignSelf: "center",
-        fontSize: 20,
+        fontSize: 22,
     },
 });

@@ -4,16 +4,17 @@ import {
     SafeAreaView,
     FlatList,
     StyleSheet,
-    StatusBar,
+    Keyboard,
 } from "react-native";
 import React, { useContext } from "react";
-import { SearchBar } from "../components/layout/SearchBar";
-import colors from "../constants/colors";
 import buildings from "../constants/buildings";
 import { SuggestionRow } from "../components/SuggestionRow";
 
 import { LocationContext } from "../contexts/LocationContext";
 import Screens from "../constants/Screens";
+import { StatusBarForm } from "../components/layout/StatusBarForm";
+import { RoundedSearchBar } from "../components/layout/RoundedSearchBar";
+import { GoBackIcon } from "../components/layout/Icons";
 
 export const SearchSuggestionScreen = ({ navigation, route }) => {
     const { chooseStartPoint, chooseDestination } = useContext(LocationContext);
@@ -31,11 +32,11 @@ export const SearchSuggestionScreen = ({ navigation, route }) => {
     };
     return (
         <SafeAreaView style={styles.container}>
-            <StatusBar />
-            <SearchBar
-                isInputFocused={true}
-                goBack={() => navigation.pop()}
+            <StatusBarForm />
+            <RoundedSearchBar
+                icon={<GoBackIcon onPress={() => navigation.pop()} />}
                 placeholderText={placeholderText}
+                autoFocus={true}
             />
             <View style={styles.suggestionBox}>
                 <Text style={styles.historyText}>SUGGESTIONS</Text>
@@ -53,6 +54,7 @@ export const SearchSuggestionScreen = ({ navigation, route }) => {
                     }}
                     keyExtractor={(item) => item}
                     keyboardShouldPersistTaps="always"
+                    onScroll={() => Keyboard.dismiss()}
                 />
             </View>
         </SafeAreaView>
@@ -61,13 +63,11 @@ export const SearchSuggestionScreen = ({ navigation, route }) => {
 
 const styles = StyleSheet.create({
     container: {
-        marginHorizontal: 10,
+        marginLeft: 10,
     },
     suggestionBox: {
-        backgroundColor: colors.white,
-        marginHorizontal: 10,
-        borderRadius: 15,
-        padding: 10,
+        height: 750,
+        marginVertical: 10,
     },
 
     historyText: { fontSize: 16, fontWeight: "bold", padding: 10 },

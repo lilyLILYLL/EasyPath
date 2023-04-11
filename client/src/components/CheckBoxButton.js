@@ -23,8 +23,9 @@ export const CheckBoxButton = ({ text }) => {
 const styles = StyleSheet.create({
     checkbox: {
         flexDirection: "row",
-        marginLeft: 20,
-        marginVertical: 15,
+        marginLeft: 25,
+        marginTop: 20,
+        marginBottom: 20,
     },
     text: {
         marginLeft: 20,

@@ -84,7 +84,7 @@ export const AuthContextProvider = ({ children }) => {
                     forgetUser();
                 }
 
-                RootNavigation.navigate(Screens.DRAWER_NAVIGATOR);
+                RootNavigation.navigate(Screens.TAB_NAVIGATOR);
             })
             .catch((error) => {
                 const error_code = error.code;
@@ -102,7 +102,7 @@ export const AuthContextProvider = ({ children }) => {
             await AsyncStorage.removeItem("password");
             await AsyncStorage.removeItem("token");
             dispatch({ type: "log_out" });
-            RootNavigation.navigate(Screens.LOGIN);
+            RootNavigation.navigate(Screens.AUTH);
         } catch (error) {
             return new Error(error.message);
         }
@@ -117,9 +117,9 @@ export const AuthContextProvider = ({ children }) => {
                 type: "log_in",
                 payload: { email, password, isLoading: false },
             });
-            RootNavigation.navigate(Screens.DRAWER_NAVIGATOR);
+            RootNavigation.navigate(Screens.TAB_NAVIGATOR);
         } else {
-            RootNavigation.navigate(Screens.LOGIN);
+            RootNavigation.navigate(Screens.AUTH);
         }
     };
 

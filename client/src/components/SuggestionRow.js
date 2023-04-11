@@ -1,30 +1,36 @@
 import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
 import React from "react";
 import colors from "../constants/colors";
-import { EvilIcons } from "@expo/vector-icons";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { ClockIcon } from "./layout/Icons";
+import { ForwardIcon } from "./layout/Icons";
 export const SuggestionRow = ({ name, onPress }) => {
     return (
         <TouchableOpacity onPress={onPress}>
             <View style={styles.row}>
-                <EvilIcons name="search" size={25} />
+                <ClockIcon />
                 <Text style={styles.rowText}>{name}</Text>
-                <MaterialCommunityIcons name="arrow-top-left" size={25} />
+                <ForwardIcon />
             </View>
+            <View style={styles.separator}></View>
         </TouchableOpacity>
     );
 };
 
 const styles = StyleSheet.create({
     row: {
-        padding: 15,
-        borderBottomColor: colors.blue,
-        borderBottomWidth: 0.3,
+        paddingVertical: 15,
+        paddingRight: 15,
+        paddingLeft: 10,
         flexDirection: "row",
+    },
+    separator: {
+        borderBottomColor: colors.lightgray,
+        borderBottomWidth: 1,
+        marginLeft: 75,
     },
     rowText: {
         fontSize: 18,
-        marginLeft: 20,
+        marginLeft: 30,
         flex: 1,
     },
 });

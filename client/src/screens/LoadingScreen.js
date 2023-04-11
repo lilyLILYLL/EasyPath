@@ -4,6 +4,7 @@ import { StatusBarForm } from "../components/layout/StatusBarForm";
 import { Logo } from "../components/layout/Logo";
 import { AuthContext } from "../contexts/AuthContext";
 import { LoadingIcon } from "../components/layout/LoadingIcon";
+import colors from "../constants/colors";
 
 export const LoadingScreen = ({ navigation }) => {
     const [isLoading, setIsLoading] = useState(true);
@@ -20,10 +21,10 @@ export const LoadingScreen = ({ navigation }) => {
         handleLoading();
     }, []);
     return (
-        <SafeAreaView>
+        <SafeAreaView style={styles.container}>
             <StatusBarForm />
             <View style={styles.logo}>
-                <Logo size={1 / 1.5} />
+                <Logo size={1 / 1.5} color="white" />
             </View>
             {isLoading ? <LoadingIcon /> : null}
         </SafeAreaView>

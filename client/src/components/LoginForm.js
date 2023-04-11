@@ -45,11 +45,12 @@ export const LoginForm = () => {
                 autoCorrect={false}
                 value={email}
                 onChangeText={setEmail}
-                onSubmitEditing={() => password_ref.current.focus()}
+                onSubmitEditing={handleSubmitEmail}
                 blurOnSubmit={false}
             />
             <View style={[styles.input, styles.passwordContainer]}>
                 <TextInput
+                    style={{ fontSize: 20, flex: 1 }}
                     ref={password_ref}
                     placeholder="Password"
                     autoCapitalize="none"
@@ -57,7 +58,6 @@ export const LoginForm = () => {
                     value={password}
                     onChangeText={setPassword}
                     autoCorrect={false}
-                    style={{ fontSize: 20, flex: 1 }}
                     returnKeyType="go"
                     onSubmitEditing={() => login(email, password)}
                     blurOnSubmit={false}
@@ -86,10 +86,17 @@ export const LoginForm = () => {
             <CheckBoxButton text="Remember me" />
 
             {state.isLoading ? (
-                <LoadingIcon />
+                <View style={styles.loadingBox}>
+                    <LoadingIcon />
+                </View>
             ) : state.errorMessage ? (
-                <Text style={styles.errorMessage}>{state.errorMessage}</Text>
+                <View style={styles.textBox}>
+                    <Text style={styles.errorMessage}>
+                        {state.errorMessage}
+                    </Text>
+                </View>
             ) : null}
+
             <ButtonForm
                 buttonText={state.isLoading ? "Loading..." : "Log In"}
                 toggle={true}
@@ -97,41 +104,69 @@ export const LoginForm = () => {
                     login(email, password);
                 }}
             />
-            <ButtonForm
+
+            {/* <ButtonForm
+                buttonText={state.isLoading ? "Loading..." : "Log In"}
+                toggle={true}
+                onPress={() => {
+                    login(email, password);
+                }}
+            /> */}
+            {/* <ButtonForm
                 buttonText="Login as Guest"
                 toggle={false}
                 onPress={() => {
                     navigation.navigate(Screens.MAP, {
-                        goBackTo: Screens.LOGIN,
+                        goBackTo: Screens.AUTH,
                     });
                 }}
-            />
+            /> */}
         </View>
     );
 };
 
 const styles = StyleSheet.create({
     input: {
-        height: screen.height * 0.07,
+        height: screen.height * 0.08,
         width: screen.width * 0.9,
-        marginTop: 10,
+        marginTop: 15,
         alignSelf: "center",
-        borderRadius: 5,
-        backgroundColor: colors.white,
+        borderRadius: 25,
+        backgroundColor: colors.whiteFont,
         padding: 15,
         fontSize: 20,
+        paddingLeft: 30,
+        shadowColor: colors.shadowColor,
+        shadowOffset: {
+            width: 1,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5, // Set elevation to make it work on Android
     },
     inputContainer: {
-        marginTop: 50,
+        marginTop: 30,
         marginBottom: 20,
     },
     passwordContainer: {
         flexDirection: "row",
         justifyContent: "space-between",
+        alignItems: "center",
     },
     errorMessage: {
         color: colors.red,
         fontSize: 16,
         marginLeft: 20,
+    },
+    textBox: {
+        height: 40,
+        marginBottom: 10,
+        flexDirection: "row",
+        alignItems: "flex-end",
+    },
+    loadingBox: {
+        height: 40,
+        marginBottom: 10,
     },
 });
