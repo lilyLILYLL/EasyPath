@@ -1,94 +1,62 @@
 import {
     StyleSheet,
     Text,
-    SafeAreaView,
-    StatusBar,
-    ScrollView,
-    Image,
     View,
-    TouchableWithoutFeedback,
-    Keyboard,
+    SafeAreaView,
+    TouchableOpacity,
 } from "react-native";
-
-import React, { useRef, useState } from "react";
+import React, { useContext } from "react";
 import { LoginForm } from "../components/LoginForm";
-import colors from "../constants/colors";
-import { KeyBoardSpacer } from "../components/layout/KeyBoardSpacer";
-import { Logo } from "../components/layout/Logo";
-import { StatusBarForm } from "../components/layout/StatusBarForm";
+import { GoBackIcon } from "../components/layout/Icons";
+import { ButtonForm } from "../components/layout/ButtonForm";
+import { AuthContext } from "../contexts/AuthContext";
+import Screens from "../constants/Screens";
 
 export const LoginScreen = ({ navigation }) => {
-    const [keyBoardEnabled, setKeyBoardEnabled] = useState(false);
-
-    const scroll_ref = useRef(null);
-
-    const handleContentSizeChange = () => {
-        scroll_ref.current.scrollToEnd({ animated: true });
-    };
-    const hideKeyboard = () => {
-        Keyboard.dismiss();
-    };
+    const { state, login } = useContext(AuthContext);
 
     return (
-        <TouchableWithoutFeedback onPress={hideKeyboard}>
-            <SafeAreaView style={styles.container}>
-                <StatusBarForm />
-                <ScrollView
-                    keyboardShouldPersistTaps="always"
-                    style={styles.contentContainer}
-                    ref={scroll_ref}
-                    onContentSizeChange={handleContentSizeChange}
-                >
-                    <View>
-                        <Logo size={1 / 2} />
-                        <View style={styles.appName}>
-                            <Text style={styles.name}>Easy Path</Text>
-                        </View>
-                        <View style={styles.underline} />
-                        <View style={styles.underline} />
-                    </View>
-
-                    <LoginForm />
-
-                    <KeyBoardSpacer
-                        onToggle={(keyBoardEnabled) => {
-                            setKeyBoardEnabled(keyBoardEnabled);
-                        }}
+        <SafeAreaView style={styles.container}>
+            <View style={styles.headBar}>
+                <TouchableOpacity>
+                    <GoBackIcon
+                        onPress={() => navigation.navigate(Screens.AUTH)}
                     />
-                </ScrollView>
-            </SafeAreaView>
-        </TouchableWithoutFeedback>
+                </TouchableOpacity>
+
+                <View style={styles.headerText}>
+                    <Text style={styles.login}>Log In</Text>
+                    <Text style={styles.details}>
+                        Enter your login details to continue
+                    </Text>
+                </View>
+            </View>
+            <LoginForm />
+        </SafeAreaView>
     );
 };
 
 const styles = StyleSheet.create({
-    container: {
-        backgroundColor: colors.mainBackgroundColor,
+    container: { marginHorizontal: 20 },
+    headBar: {
+        flexDirection: "row",
+    },
+    headerText: {
         flex: 1,
-    },
-    contentContainer: {
-        marginLeft: 10,
-        height: 700,
-    },
-
-    appName: {
-        backgroundColor: colors.blue,
-        height: 100,
-        marginHorizontal: 90,
         justifyContent: "center",
-        alignItems: "center",
-        marginTop: 20,
+        marginRight: 70,
+        marginLeft: 50,
+        marginBottom: 20,
     },
-    name: {
-        color: colors.white,
-        fontSize: 30,
-    },
-    underline: {
-        borderWidth: 0.8,
-        borderBottomColor: colors.blue,
-        marginTop: 10,
-        width: 240,
+    login: {
+        fontWeight: "bold",
+        fontSize: 20,
         alignSelf: "center",
-        backgroundColor: colors.blue,
+        marginVertical: 10,
+    },
+    details: {
+        alignSelf: "center",
+        fontSize: 16,
+        textAlign: "center",
     },
 });

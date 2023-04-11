@@ -86,10 +86,17 @@ export const LoginForm = () => {
             <CheckBoxButton text="Remember me" />
 
             {state.isLoading ? (
-                <LoadingIcon />
+                <View style={styles.loadingBox}>
+                    <LoadingIcon />
+                </View>
             ) : state.errorMessage ? (
-                <Text style={styles.errorMessage}>{state.errorMessage}</Text>
+                <View style={styles.textBox}>
+                    <Text style={styles.errorMessage}>
+                        {state.errorMessage}
+                    </Text>
+                </View>
             ) : null}
+
             <ButtonForm
                 buttonText={state.isLoading ? "Loading..." : "Log In"}
                 toggle={true}
@@ -97,15 +104,23 @@ export const LoginForm = () => {
                     login(email, password);
                 }}
             />
-            <ButtonForm
+
+            {/* <ButtonForm
+                buttonText={state.isLoading ? "Loading..." : "Log In"}
+                toggle={true}
+                onPress={() => {
+                    login(email, password);
+                }}
+            /> */}
+            {/* <ButtonForm
                 buttonText="Login as Guest"
                 toggle={false}
                 onPress={() => {
                     navigation.navigate(Screens.MAP, {
-                        goBackTo: Screens.LOGIN,
+                        goBackTo: Screens.AUTH,
                     });
                 }}
-            />
+            /> */}
         </View>
     );
 };
@@ -121,6 +136,14 @@ const styles = StyleSheet.create({
         padding: 15,
         fontSize: 20,
         paddingLeft: 30,
+        shadowColor: colors.shadowColor,
+        shadowOffset: {
+            width: 1,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5, // Set elevation to make it work on Android
     },
     inputContainer: {
         marginTop: 30,
@@ -135,5 +158,15 @@ const styles = StyleSheet.create({
         color: colors.red,
         fontSize: 16,
         marginLeft: 20,
+    },
+    textBox: {
+        height: 40,
+        marginBottom: 10,
+        flexDirection: "row",
+        alignItems: "flex-end",
+    },
+    loadingBox: {
+        height: 40,
+        marginBottom: 10,
     },
 });

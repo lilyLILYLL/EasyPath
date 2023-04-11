@@ -8,7 +8,6 @@ import {
     TouchableOpacity,
 } from "react-native";
 import React, { useContext, useEffect } from "react";
-import { SearchBar } from "../components/layout/SearchBar";
 import colors from "../constants/colors.js";
 import { RecentSearchItem } from "../components/RecentSearchItem";
 import { useNavigation } from "@react-navigation/native";
@@ -16,6 +15,7 @@ import { SearchContext } from "../contexts/SearchContext";
 import Screens from "../constants/Screens";
 import { LoadingIcon } from "../components/layout/LoadingIcon";
 import { LocationIcon } from "../components/layout/Icons";
+import { RoundedSearchBar } from "../components/layout/RoundedSearchBar";
 
 export const WelcomeScreen = () => {
     const navigation = useNavigation();
@@ -39,14 +39,13 @@ export const WelcomeScreen = () => {
     return (
         <SafeAreaView style={styles.container}>
             <StatusBar />
-            <View style={styles.searchBarIcon}>
-                <SearchBar
-                    onPress={showSuggestionList}
-                    placeholderText="Search Your Destination"
-                    icon={<LocationIcon />}
-                    size="large"
-                />
-            </View>
+
+            <RoundedSearchBar
+                onPress={showSuggestionList}
+                placeholderText="Search Your Destination"
+                icon={<LocationIcon />}
+                autoFocus={false}
+            />
 
             <View style={styles.recentSearch}>
                 <Text style={styles.headerText}>Recent Searches</Text>

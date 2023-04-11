@@ -27,6 +27,15 @@ export const GoBackIcon = ({ onPress }) => {
 export const LocationIcon = () => {
     return <Ionicons name="location" size={"35%"} color={colors.blue} />;
 };
+export const SearchIcon = ({ size }) => {
+    return (
+        <AntDesign
+            name="search1"
+            color={colors.blue}
+            size={size === "small" ? 20 : 25}
+        />
+    );
+};
 export const ForwardIcon = () => {
     return <MaterialCommunityIcons name="arrow-top-left" size={25} />;
 };

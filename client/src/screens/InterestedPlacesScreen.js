@@ -1,11 +1,9 @@
 import { StyleSheet, Text, View, SafeAreaView, Image } from "react-native";
-import React, { useContext } from "react";
-import { HeadBar } from "../components/layout/HeadBar";
-import { SearchBar } from "../components/layout/SearchBar";
+import React from "react";
 import { InterestedPlaces } from "../components/InterestedPlaces";
-import { Logo } from "../components/layout/Logo";
 import Screens from "../constants/Screens";
-import { MenuIcon } from "../components/layout/Icons";
+import { RoundedSearchBar } from "../components/layout/RoundedSearchBar";
+import { LocationIcon } from "../components/layout/Icons";
 export const InterestedPlacesScreen = ({ navigation }) => {
     const toggleDrawer = () => {
         navigation.openDrawer();
@@ -19,9 +17,11 @@ export const InterestedPlacesScreen = ({ navigation }) => {
 
     return (
         <SafeAreaView>
-            <SearchBar
+            <RoundedSearchBar
+                icon={<LocationIcon />}
                 onPress={searchDestination}
                 placeholderText="Search Your Destination"
+                autoFocus={false}
             />
             <View style={styles.contentBox}>
                 <InterestedPlaces />

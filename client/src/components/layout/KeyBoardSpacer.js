@@ -17,7 +17,7 @@ export const KeyBoardSpacer = ({ onToggle }) => {
             (event) => {
                 const keyBoardHeight = event.endCoordinates.height;
                 if (Platform.OS === "ios") {
-                    setKeyBoardSpacer(keyBoardHeight);
+                    setKeyBoardSpacer(keyBoardHeight - 40);
                 } else if (Platform.OS === "android") {
                     setKeyBoardSpacer(1);
                 }

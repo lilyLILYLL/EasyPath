@@ -4,20 +4,19 @@ import {
     View,
     SafeAreaView,
     TouchableOpacity,
-    StatusBar,
 } from "react-native";
 import React, { useContext } from "react";
 import colors from "../constants/colors";
 import { SearchContext } from "../contexts/SearchContext";
-import { SearchBar } from "../components/layout/SearchBar";
 import { LocationContext } from "../contexts/LocationContext";
-import { FontAwesome, Octicons, Entypo, Ionicons } from "@expo/vector-icons";
+import { FontAwesome } from "@expo/vector-icons";
 import moment from "moment";
 import Screens from "../constants/Screens";
 import { GoBackIcon } from "../components/layout/Icons";
 import { MapScreenIcon } from "../components/layout/Icons";
 import { StatusBarForm } from "../components/layout/StatusBarForm";
 import { SwapIconVertical } from "../components/layout/Icons";
+import { SquaredSearchBar } from "../components/layout/SquaredSearchBar";
 const DUMMY_TIME = 6;
 
 export const MapScreen = ({ navigation, route }) => {
@@ -29,14 +28,14 @@ export const MapScreen = ({ navigation, route }) => {
     const params = route.params;
 
     const searchStartPoint = () => {
-        navigation.push(Screens.SUGGESTION, {
+        navigation.navigate(Screens.SUGGESTION, {
             placeholderText: "Choose Start Point",
             title: "startPoint",
             goBackTo: params.goBackTo,
         });
     };
     const searchDestination = () => {
-        navigation.push(Screens.SUGGESTION, {
+        navigation.navigate(Screens.SUGGESTION, {
             placeholderText: "Choose Destination",
             title: "destination",
             goBackTo: params.goBackTo,
@@ -63,17 +62,13 @@ export const MapScreen = ({ navigation, route }) => {
                 <MapScreenIcon />
 
                 <View style={styles.searchInput}>
-                    <SearchBar
-                        placeholderText="Choose Start Point"
+                    <SquaredSearchBar
                         onPress={searchStartPoint}
                         searchValue={startPoint}
-                        icon={null}
                     />
-                    <SearchBar
-                        placeholderText="Choose Destination"
+                    <SquaredSearchBar
                         onPress={searchDestination}
                         searchValue={destination}
-                        icon={null}
                     />
                 </View>
                 <View style={styles.swapIcon}>
