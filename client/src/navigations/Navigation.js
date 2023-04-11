@@ -11,6 +11,7 @@ import { SearchSuggestionScreen } from "../screens/SearchSuggestionScreen";
 import { LoadingScreen } from "../screens/LoadingScreen";
 import { navigationRef } from "./RootNavigation";
 import { RecentSearchScreen } from "../screens/RecentSearchScreen";
+import { TabNavigator } from "./TabNavigator";
 import Screens from "../constants/Screens";
 const MainStack = createNativeStackNavigator();
 export const Navigation = () => {
@@ -31,8 +32,8 @@ export const Navigation = () => {
                                 options={{ headerShown: false }}
                             />
                             <MainStack.Screen
-                                name={Screens.DRAWER_NAVIGATOR}
-                                component={DrawerNavigator}
+                                name={Screens.TAB_NAVIGATOR}
+                                component={TabNavigator}
                                 options={{ headerShown: false }}
                             />
                             <MainStack.Screen

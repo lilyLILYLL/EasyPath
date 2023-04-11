@@ -5,25 +5,21 @@ import {
     SafeAreaView,
     ScrollView,
     StatusBar,
+    TouchableOpacity,
 } from "react-native";
 import React, { useContext, useEffect } from "react";
-import { HeadBar } from "../components/layout/HeadBar";
 import { SearchBar } from "../components/layout/SearchBar";
 import colors from "../constants/colors.js";
 import { RecentSearchItem } from "../components/RecentSearchItem";
 import { useNavigation } from "@react-navigation/native";
-import { Logo } from "../components/layout/Logo";
 import { SearchContext } from "../contexts/SearchContext";
-import moment from "moment";
 import Screens from "../constants/Screens";
 import { LoadingIcon } from "../components/layout/LoadingIcon";
-import { MenuIcon } from "../components/layout/Icons";
-import { ButtonForm } from "../components/layout/ButtonForm";
+import { LocationIcon } from "../components/layout/Icons";
 
 export const WelcomeScreen = () => {
     const navigation = useNavigation();
     const { state, fetch } = useContext(SearchContext);
-    const currentDate = moment().format("DD/MM/YYYY");
 
     useEffect(() => {
         fetch();
@@ -43,54 +39,47 @@ export const WelcomeScreen = () => {
     return (
         <SafeAreaView style={styles.container}>
             <StatusBar />
-            <HeadBar
-                header="Welcome John Doe"
-                onPress={toggleDrawer}
-                icon={<MenuIcon />}
-            />
-            <SearchBar
-                onPress={showSuggestionList}
-                placeholderText="Search here"
-            />
+            <View style={styles.searchBarIcon}>
+                <SearchBar
+                    onPress={showSuggestionList}
+                    placeholderText="Search Your Destination"
+                    icon={<LocationIcon />}
+                    size="large"
+                />
+            </View>
 
-            <View>
-                <View style={styles.logoView}>
-                    <Text style={styles.lastLogin}>
-                        Last Login: {currentDate}
+            <View style={styles.recentSearch}>
+                <Text style={styles.headerText}>Recent Searches</Text>
+                <View style={styles.seperator}></View>
+
+                <ScrollView>
+                    {state.isLoading ? (
+                        <LoadingIcon />
+                    ) : (
+                        state.recentSearch &&
+                        state.recentSearch
+                            .slice(0, 9)
+                            .map(({ from, to, date, time }, index) => {
+                                return (
+                                    <RecentSearchItem
+                                        startLocation={from}
+                                        destination={to}
+                                        date={date}
+                                        time={time}
+                                        key={index}
+                                    />
+                                );
+                            })
+                    )}
+                </ScrollView>
+                <TouchableOpacity
+                    onPress={() => navigation.navigate(Screens.RECENT_SEARCH)}
+                    style={styles.button}
+                >
+                    <Text style={styles.buttonText}>
+                        More from recent history
                     </Text>
-                    <Logo size={1 / 4} />
-                </View>
-                <View style={styles.recentSearch}>
-                    <Text style={styles.headerText}>Recent Searches</Text>
-                    <View style={styles.seperator}></View>
-
-                    <ScrollView>
-                        {state.isLoading ? (
-                            <LoadingIcon />
-                        ) : (
-                            state.recentSearch &&
-                            state.recentSearch
-                                .slice(0, 9)
-                                .map(({ from, to, date, time }, index) => {
-                                    return (
-                                        <RecentSearchItem
-                                            startLocation={from}
-                                            destination={to}
-                                            date={date}
-                                            time={time}
-                                            key={index}
-                                        />
-                                    );
-                                })
-                        )}
-                        <ButtonForm
-                            buttonText="More searches"
-                            onPress={() =>
-                                navigation.navigate(Screens.RECENT_SEARCH)
-                            }
-                        />
-                    </ScrollView>
-                </View>
+                </TouchableOpacity>
             </View>
         </SafeAreaView>
     );
@@ -107,25 +96,38 @@ const styles = StyleSheet.create({
         marginHorizontal: 30,
         alignItems: "center",
     },
-    lastLogin: {
-        fontSize: 16,
-        color: colors.blue,
-    },
 
     recentSearch: {
-        height: 600,
+        height: 690,
+        marginTop: 15,
+        borderRadius: 30,
+    },
+    button: {
+        flexDirection: "column",
+        alignItems: "center",
+        marginTop: 10,
+        marginBottom: 20,
+    },
+    buttonText: {
+        fontWeight: "bold",
+        color: colors.red,
     },
 
     headerText: {
-        fontSize: 30,
+        fontSize: 20,
         marginLeft: 30,
         color: colors.blue,
+        fontWeight: "bold",
     },
     seperator: {
-        borderColor: colors.blue,
-        borderWidth: 1,
         marginHorizontal: 25,
         borderRadius: 5,
         marginVertical: 10,
+        borderBottomColor: colors.blue,
+        borderBottomWidth: 0.8,
+    },
+    searchBarIcon: {
+        marginHorizontal: 20,
+        marginTop: 10,
     },
 });

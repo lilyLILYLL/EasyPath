@@ -1,10 +1,12 @@
 export default {
     LOADING: "Loading Screen",
     DRAWER_NAVIGATOR: "Drawer Navigator",
-    INTERESTED_PLACE: "Interested Places Screen",
+    INTERESTED_PLACE: "Recommendations",
     LOGIN: "Login Screen",
     MAP: "Map Screen",
     SUGGESTION: "Search Suggestion Screen",
-    WELCOME: "Welcome Screen",
+    WELCOME: "Welcome",
     RECENT_SEARCH: "Recent Search Screen",
+    TAB_NAVIGATOR: "Tab Navigator",
+    SETTING: "Settings",
 };

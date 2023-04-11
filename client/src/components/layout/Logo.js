@@ -1,8 +1,9 @@
-import { StyleSheet, Text, View, Dimensions, Image } from "react-native";
+import { StyleSheet, View, Dimensions, Image } from "react-native";
 import React from "react";
 
 const screen = Dimensions.get("window");
 const radio = screen.width / 1417;
+
 export const Logo = ({ size }) => {
     return (
         <View>

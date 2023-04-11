@@ -7,16 +7,17 @@ import {
     StatusBar,
 } from "react-native";
 import React, { useContext } from "react";
-import { HeadBar } from "../components/layout/HeadBar";
 import colors from "../constants/colors";
 import { SearchContext } from "../contexts/SearchContext";
 import { SearchBar } from "../components/layout/SearchBar";
 import { LocationContext } from "../contexts/LocationContext";
-import { FontAwesome, Ionicons } from "@expo/vector-icons";
+import { FontAwesome, Octicons, Entypo, Ionicons } from "@expo/vector-icons";
 import moment from "moment";
 import Screens from "../constants/Screens";
 import { GoBackIcon } from "../components/layout/Icons";
-
+import { MapScreenIcon } from "../components/layout/Icons";
+import { StatusBarForm } from "../components/layout/StatusBarForm";
+import { SwapIconVertical } from "../components/layout/Icons";
 const DUMMY_TIME = 6;
 
 export const MapScreen = ({ navigation, route }) => {
@@ -48,27 +49,38 @@ export const MapScreen = ({ navigation, route }) => {
     };
 
     return (
-        <SafeAreaView>
-            <StatusBar />
-            <HeadBar
-                header="Map View"
-                onPress={() => {
-                    chooseStartPoint("Your Location");
-                    chooseDestination("");
-                    navigation.navigate(params.goBackTo);
-                }}
-                icon={<GoBackIcon />}
-            />
-            <SearchBar
-                placeholderText={"Choose Start Point"}
-                onPress={searchStartPoint}
-                value={startPoint}
-            />
-            <SearchBar
-                placeholderText={"Choose Destination"}
-                onPress={searchDestination}
-                value={destination}
-            />
+        <SafeAreaView style={styles.container}>
+            <StatusBarForm />
+
+            <View style={styles.searchBox}>
+                <GoBackIcon
+                    onPress={() => {
+                        chooseStartPoint("Your Location");
+                        chooseDestination("");
+                        navigation.navigate(params.goBackTo);
+                    }}
+                />
+                <MapScreenIcon />
+
+                <View style={styles.searchInput}>
+                    <SearchBar
+                        placeholderText="Choose Start Point"
+                        onPress={searchStartPoint}
+                        searchValue={startPoint}
+                        icon={null}
+                    />
+                    <SearchBar
+                        placeholderText="Choose Destination"
+                        onPress={searchDestination}
+                        searchValue={destination}
+                        icon={null}
+                    />
+                </View>
+                <View style={styles.swapIcon}>
+                    <SwapIconVertical />
+                </View>
+            </View>
+
             <TouchableOpacity onPress={() => search(startPoint, destination)}>
                 <View style={styles.startButton}>
                     <FontAwesome
@@ -94,21 +106,6 @@ export const MapScreen = ({ navigation, route }) => {
 };
 
 const styles = StyleSheet.create({
-    inputBox: {
-        backgroundColor: colors.white,
-        marginTop: 20,
-        marginHorizontal: 20,
-        paddingHorizontal: 10,
-        paddingVertical: 15,
-        flexDirection: "row",
-        borderRadius: 10,
-    },
-    labelBox: {
-        borderRightColor: colors.blue,
-        borderRightWidth: 0.7,
-        width: 100,
-        marginRight: 10,
-    },
     label: {
         fontSize: 16,
         fontWeight: "bold",
@@ -149,5 +146,19 @@ const styles = StyleSheet.create({
         alignSelf: "center",
         marginTop: 100,
         fontSize: 30,
+    },
+
+    searchBox: {
+        flexDirection: "row",
+        marginLeft: 5,
+        marginVertical: 15,
+    },
+    searchInput: {
+        width: "65%",
+        marginLeft: 15,
+        marginRight: 5,
+    },
+    swapIcon: {
+        alignSelf: "center",
     },
 });

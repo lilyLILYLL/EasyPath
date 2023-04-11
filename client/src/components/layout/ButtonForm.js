@@ -27,18 +27,18 @@ export const ButtonForm = ({ buttonText, toggle, onPress }) => {
 
 const styles = StyleSheet.create({
     container: {
-        height: screen.height * 0.07,
+        height: screen.height * 0.08,
         width: screen.width * 0.9,
         backgroundColor: colors.blue,
         marginVertical: 10,
         alignSelf: "center",
-        borderRadius: 5,
+        borderRadius: 25,
         alignContent: "center",
         justifyContent: "center",
     },
     text: {
         color: colors.white,
         alignSelf: "center",
-        fontSize: 20,
+        fontSize: 22,
     },
 });

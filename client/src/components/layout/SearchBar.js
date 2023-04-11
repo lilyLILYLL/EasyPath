@@ -13,33 +13,46 @@ import colors from "../../constants/colors";
 
 export const SearchBar = ({
     onPress,
-    isInputFocused,
+    isInputFocused, //check
     goBack,
     placeholderText,
-    value,
+    searchValue,
+    icon,
+    size,
 }) => {
     return (
-        <SafeAreaView style={styles.searchBar}>
-            {isInputFocused ? (
+        <SafeAreaView
+            style={
+                size !== "large"
+                    ? styles.searchBar
+                    : [styles.searchBar, { height: 60, borderRadius: 30 }]
+            }
+        >
+            {/* {isInputFocused ? ( // icon="goBack"
                 <TouchableOpacity>
                     <Entypo
                         name="chevron-thin-left"
-                        size={25}
+                        size={30}
                         onPress={goBack}
                     />
                 </TouchableOpacity>
-            ) : (
+            ) : icon === null ? null : (
                 <Ionicons name="location" size={35} color={colors.blue} />
-            )}
-
+            )} */}
+            {icon}
             <TextInput
                 placeholder={placeholderText}
-                style={styles.text}
+                placeholderTextColor={colors.placeholderColor}
+                style={
+                    size !== "large"
+                        ? styles.text
+                        : [styles.text, { fontSize: 20 }]
+                }
                 onFocus={onPress}
                 autoFocus={isInputFocused}
-                value={value}
+                value={searchValue}
             />
-            <AntDesign name="search1" color={colors.blue} size={25} />
+            <AntDesign name="search1" color={colors.blue} size={""} />
         </SafeAreaView>
     );
 };
@@ -47,18 +60,27 @@ export const SearchBar = ({
 const styles = StyleSheet.create({
     searchBar: {
         flexDirection: "row",
-        borderColor: "black",
-        borderWidth: 1,
-        borderRadius: 30,
+        borderRadius: 25,
         backgroundColor: colors.white,
-        marginTop: 15,
-        marginHorizontal: 15,
+        marginBottom: 10,
         paddingHorizontal: 15,
-        paddingVertical: 8,
+        paddingVertical: 10,
         alignItems: "center",
+        borderWidth: 1,
+        //shadow
+        borderColor: colors.lightgray,
+        shadowColor: colors.shadowColor,
+        shadowOffset: {
+            width: 1,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5, // Set elevation to make it work on Android
+        height: 45,
     },
     text: {
-        fontSize: 20,
+        fontSize: 17,
         color: colors.blue,
         marginLeft: 20,
         flex: 1,

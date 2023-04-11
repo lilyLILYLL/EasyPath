@@ -19,20 +19,12 @@ export const InterestedPlacesScreen = ({ navigation }) => {
 
     return (
         <SafeAreaView>
-            <HeadBar
-                header="Places of Interest"
-                onPress={toggleDrawer}
-                icon={<MenuIcon />}
-            />
             <SearchBar
                 onPress={searchDestination}
-                placeholderText="Search here"
+                placeholderText="Search Your Destination"
             />
             <View style={styles.contentBox}>
                 <InterestedPlaces />
-                <View style={styles.logo}>
-                    <Logo size={1 / 4} />
-                </View>
             </View>
         </SafeAreaView>
     );

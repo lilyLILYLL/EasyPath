@@ -45,11 +45,12 @@ export const LoginForm = () => {
                 autoCorrect={false}
                 value={email}
                 onChangeText={setEmail}
-                onSubmitEditing={() => password_ref.current.focus()}
+                onSubmitEditing={handleSubmitEmail}
                 blurOnSubmit={false}
             />
             <View style={[styles.input, styles.passwordContainer]}>
                 <TextInput
+                    style={{ fontSize: 20, flex: 1 }}
                     ref={password_ref}
                     placeholder="Password"
                     autoCapitalize="none"
@@ -57,7 +58,6 @@ export const LoginForm = () => {
                     value={password}
                     onChangeText={setPassword}
                     autoCorrect={false}
-                    style={{ fontSize: 20, flex: 1 }}
                     returnKeyType="go"
                     onSubmitEditing={() => login(email, password)}
                     blurOnSubmit={false}
@@ -112,22 +112,24 @@ export const LoginForm = () => {
 
 const styles = StyleSheet.create({
     input: {
-        height: screen.height * 0.07,
+        height: screen.height * 0.08,
         width: screen.width * 0.9,
-        marginTop: 10,
+        marginTop: 15,
         alignSelf: "center",
-        borderRadius: 5,
-        backgroundColor: colors.white,
+        borderRadius: 25,
+        backgroundColor: colors.whiteFont,
         padding: 15,
         fontSize: 20,
+        paddingLeft: 30,
     },
     inputContainer: {
-        marginTop: 50,
+        marginTop: 30,
         marginBottom: 20,
     },
     passwordContainer: {
         flexDirection: "row",
         justifyContent: "space-between",
+        alignItems: "center",
     },
     errorMessage: {
         color: colors.red,
