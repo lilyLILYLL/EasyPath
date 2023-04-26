@@ -12,12 +12,10 @@ import {
 
 import React, { useRef, useState, useContext } from "react";
 import colors from "../constants/colors";
-import { KeyBoardSpacer } from "../components/layout/KeyBoardSpacer";
-import { Logo } from "../components/layout/Logo";
 import { StatusBarForm } from "../components/layout/StatusBarForm";
 import { ButtonForm } from "../components/layout/ButtonForm";
 import Screens from "../constants/Screens";
-
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 export const AuthScreen = ({ navigation }) => {
     const [keyBoardEnabled, setKeyBoardEnabled] = useState(false);
 
@@ -34,47 +32,37 @@ export const AuthScreen = ({ navigation }) => {
         <TouchableWithoutFeedback onPress={hideKeyboard}>
             <SafeAreaView style={styles.container}>
                 <StatusBarForm />
-                <ScrollView
-                    keyboardShouldPersistTaps="always"
-                    style={styles.contentContainer}
-                    ref={scroll_ref}
-                    onContentSizeChange={handleContentSizeChange}
-                >
-                    <View>
-                        <Logo size={1 / 2} />
-                        <View style={styles.appName}>
-                            <Text style={styles.name}>Easy Path</Text>
-                        </View>
-                        <View style={styles.underline} />
-                        <View style={styles.underline} />
-                    </View>
 
-                    {/* <LoginForm /> */}
-                    <View style={styles.button}>
-                        <ButtonForm
-                            buttonText="Log in"
-                            toggle={true}
-                            onPress={() => {
-                                navigation.navigate(Screens.LOGIN);
-                            }}
-                        />
-                        <ButtonForm
-                            buttonText="Login as Guest"
-                            toggle={false}
-                            onPress={() => {
-                                navigation.navigate(Screens.MAP, {
-                                    goBackTo: Screens.AUTH,
-                                });
-                            }}
-                        />
-                    </View>
-
-                    <KeyBoardSpacer
-                        onToggle={(keyBoardEnabled) => {
-                            setKeyBoardEnabled(keyBoardEnabled);
+                {/* App Name and title */}
+                <MaterialCommunityIcons
+                    name="map-marker-radius"
+                    size={200}
+                    color={colors.blue}
+                    style={styles.mapLogo}
+                />
+                <View style={styles.name_title}>
+                    <Text style={styles.name}>Easy Path</Text>
+                    <Text style={styles.title}>
+                        Make it easier and quicker to reach your destination.
+                    </Text>
+                </View>
+                {/* Buttons */}
+                <View style={styles.button}>
+                    <ButtonForm
+                        buttonText="Log In"
+                        onPress={() => {
+                            navigation.navigate(Screens.LOGIN);
                         }}
                     />
-                </ScrollView>
+                    <ButtonForm
+                        buttonText="Login as Guest"
+                        onPress={() => {
+                            navigation.navigate(Screens.MAP, {
+                                goBackTo: Screens.AUTH,
+                            });
+                        }}
+                    />
+                </View>
             </SafeAreaView>
         </TouchableWithoutFeedback>
     );
@@ -84,34 +72,33 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: colors.mainBackgroundColor,
         flex: 1,
-    },
-    contentContainer: {
         marginLeft: 10,
-        height: 700,
-        marginTop: 30,
     },
 
-    appName: {
-        backgroundColor: colors.blue,
-        height: 100,
-        marginHorizontal: 90,
-        justifyContent: "center",
-        alignItems: "center",
-        marginTop: 20,
+    mapLogo: {
+        alignSelf: "center",
+        marginTop: 100,
+    },
+    name_title: {
+        marginTop: 50,
+        marginBottom: 100,
     },
     name: {
-        color: colors.white,
-        fontSize: 30,
+        color: colors.blue,
+        fontSize: 40,
+        textAlign: "center",
+        fontWeight: "bold",
     },
-    underline: {
-        borderWidth: 0.8,
-        borderBottomColor: colors.blue,
-        marginTop: 10,
-        width: 240,
-        alignSelf: "center",
-        backgroundColor: colors.blue,
+
+    header: {
+        textAlign: "center",
+        fontSize: 25,
+        fontWeight: "bold",
     },
-    button: {
-        marginTop: 220,
+    title: {
+        textAlign: "center",
+        fontSize: 18,
+        marginHorizontal: 40,
+        marginTop: 5,
     },
 });

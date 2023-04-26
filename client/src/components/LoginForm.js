@@ -47,6 +47,7 @@ export const LoginForm = () => {
                 onChangeText={setEmail}
                 onSubmitEditing={handleSubmitEmail}
                 blurOnSubmit={false}
+                autoFocus={true}
             />
             <View style={[styles.input, styles.passwordContainer]}>
                 <TextInput
@@ -85,42 +86,26 @@ export const LoginForm = () => {
 
             <CheckBoxButton text="Remember me" />
 
-            {state.isLoading ? (
-                <View style={styles.loadingBox}>
-                    <LoadingIcon />
-                </View>
-            ) : state.errorMessage ? (
-                <View style={styles.textBox}>
-                    <Text style={styles.errorMessage}>
-                        {state.errorMessage}
-                    </Text>
-                </View>
-            ) : null}
+            <View style={styles.loading}>
+                {state.isLoading ? (
+                    <View style={styles.loadingBox}>
+                        <LoadingIcon />
+                    </View>
+                ) : state.errorMessage ? (
+                    <View style={styles.textBox}>
+                        <Text style={styles.errorMessage}>
+                            {state.errorMessage}
+                        </Text>
+                    </View>
+                ) : null}
+            </View>
 
             <ButtonForm
-                buttonText={state.isLoading ? "Loading..." : "Log In"}
-                toggle={true}
+                buttonText={"Log In"}
                 onPress={() => {
                     login(email, password);
                 }}
             />
-
-            {/* <ButtonForm
-                buttonText={state.isLoading ? "Loading..." : "Log In"}
-                toggle={true}
-                onPress={() => {
-                    login(email, password);
-                }}
-            /> */}
-            {/* <ButtonForm
-                buttonText="Login as Guest"
-                toggle={false}
-                onPress={() => {
-                    navigation.navigate(Screens.MAP, {
-                        goBackTo: Screens.AUTH,
-                    });
-                }}
-            /> */}
         </View>
     );
 };
@@ -153,20 +138,20 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
+        marginBottom: 10,
     },
     errorMessage: {
         color: colors.red,
         fontSize: 16,
-        marginLeft: 20,
+        marginLeft: 15,
     },
     textBox: {
-        height: 40,
-        marginBottom: 10,
-        flexDirection: "row",
-        alignItems: "flex-end",
+        marginTop: 10,
     },
     loadingBox: {
-        height: 40,
         marginBottom: 10,
+    },
+    loading: {
+        height: 40,
     },
 });

@@ -9,10 +9,11 @@ import React from "react";
 import colors from "../../constants/colors";
 
 const screen = Dimensions.get("window");
-export const ButtonForm = ({ buttonText, toggle, onPress }) => {
+export const ButtonForm = ({ buttonText, onPress }) => {
     let containerStyle = styles.container;
     let textStyle = styles.text;
-    if (!toggle) {
+
+    if (buttonText !== "Log In") {
         containerStyle = [containerStyle, { backgroundColor: colors.white }];
         textStyle = [textStyle, { color: colors.blue }];
     }
@@ -30,17 +31,17 @@ const styles = StyleSheet.create({
         height: screen.height * 0.08,
         width: screen.width * 0.9,
         backgroundColor: colors.blue,
-        marginVertical: 7,
+        marginVertical: 10,
         alignSelf: "center",
         borderRadius: 25,
         alignContent: "center",
         justifyContent: "center",
-        shadowColor: colors.shadowColor,
         shadowOffset: {
             width: 1,
             height: 2,
         },
-        shadowOpacity: 0.25,
+        shadowColor: colors.shadowColor,
+        shadowOpacity: 0.5,
         shadowRadius: 3.84,
         elevation: 5, // Set elevation to make it work on Android
     },
@@ -49,4 +50,5 @@ const styles = StyleSheet.create({
         alignSelf: "center",
         fontSize: 22,
     },
+    shadow: {},
 });

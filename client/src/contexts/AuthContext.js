@@ -43,6 +43,8 @@ const reducer = (state, action) => {
                 email: action.payload.email,
                 password: action.payload.password,
             };
+        case "reset_errorMessage":
+            return { ...state, errorMessage: "" };
         default:
             return state;
     }
@@ -161,6 +163,10 @@ export const AuthContextProvider = ({ children }) => {
         dispatch({ type: "toggle_rememberMe", payload: value });
     };
 
+    const resetErrorMessage = () => {
+        dispatch({ type: "reset_errorMessage" });
+    };
+
     const authContextValue = {
         login,
         logout,
@@ -170,6 +176,7 @@ export const AuthContextProvider = ({ children }) => {
         getRememberUser,
         forgetUser,
         toggleRememberMe,
+        resetErrorMessage,
     };
 
     return (

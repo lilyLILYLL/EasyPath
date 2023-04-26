@@ -26,6 +26,7 @@ export const MapScreen = ({ navigation, route }) => {
     const currentDate = moment().format("DD/MM/YYYY");
 
     const params = route.params;
+    console.log(params.goBackTo);
 
     const searchStartPoint = () => {
         navigation.navigate(Screens.SUGGESTION, {
