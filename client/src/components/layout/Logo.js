@@ -11,7 +11,10 @@ export const Logo = ({ size }) => {
                 source={require("../../assets/UOWLogos/UOW_Primary_RGB_Black.png")}
                 style={[
                     styles.logo,
-                    { width: screen.width * size, height: 1166 * radio * size },
+                    {
+                        width: screen.width * size,
+                        height: 1166 * radio * size,
+                    },
                 ]}
             />
         </View>

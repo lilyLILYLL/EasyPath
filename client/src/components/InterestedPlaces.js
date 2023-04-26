@@ -63,26 +63,26 @@ const LocationItem = ({ icon, locationName, onChooseDestination }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginLeft: 25,
+        marginHorizontal: 20,
         height: 680,
         marginBottom: 20,
-        paddingRight: 15,
         marginTop: 20,
-        marginBottom: 10,
     },
     locationItem: {
         flexDirection: "row",
-        paddingVertical: 12,
+        paddingVertical: 11,
         alignItems: "center",
+        marginLeft: 5,
+        marginRight: 10,
     },
     locationText: {
-        fontSize: 22,
+        fontSize: 20,
         color: colors.blue,
         marginBottom: 3,
         marginLeft: 4,
     },
     location: {
-        width: 230,
+        width: 225,
     },
     text: {
         fontSize: 14,
@@ -91,11 +91,11 @@ const styles = StyleSheet.create({
     separator: {
         borderBottomColor: colors.blue,
         borderBottomWidth: 0.5,
-        marginHorizontal: 10,
+        marginLeft: 5,
+        marginRight: 10,
     },
     icon: {
         width: 70,
-        marginLeft: 10,
         marginRight: 20,
         paddingLeft: 2,
     },

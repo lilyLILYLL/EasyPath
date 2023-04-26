@@ -5,15 +5,20 @@ import {
     SafeAreaView,
     TouchableOpacity,
 } from "react-native";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { LoginForm } from "../components/LoginForm";
 import { GoBackIcon } from "../components/layout/Icons";
 import { ButtonForm } from "../components/layout/ButtonForm";
 import { AuthContext } from "../contexts/AuthContext";
 import Screens from "../constants/Screens";
+import { useIsFocused } from "@react-navigation/native";
 
 export const LoginScreen = ({ navigation }) => {
-    const { state, login } = useContext(AuthContext);
+    const { resetErrorMessage } = useContext(AuthContext);
+    const isFocused = useIsFocused();
+    useEffect(() => {
+        resetErrorMessage();
+    }, [isFocused]);
 
     return (
         <SafeAreaView style={styles.container}>

@@ -16,7 +16,7 @@ export const InterestedPlacesScreen = ({ navigation }) => {
         });
 
     return (
-        <SafeAreaView>
+        <SafeAreaView style={styles.container}>
             <RoundedSearchBar
                 icon={<LocationIcon />}
                 onPress={searchDestination}
@@ -31,6 +31,7 @@ export const InterestedPlacesScreen = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
+    container: {},
     contentBox: {
         flexDirection: "row",
     },

@@ -17,6 +17,7 @@ export const RoundedSearchBar = ({
                 onFocus={onPress}
                 style={styles.text}
                 autoFocus={autoFocus}
+                autoCorrect={false}
             />
             <SearchIcon />
         </SafeAreaView>
@@ -32,7 +33,8 @@ const styles = StyleSheet.create({
         paddingHorizontal: 15,
         paddingVertical: 9,
         marginHorizontal: 20,
-        marginVertical: 5,
+        marginTop: 15,
+        marginBottom: 5,
         alignItems: "center",
         backgroundColor: colors.white,
         shadowColor: colors.shadowColor,
@@ -48,6 +50,6 @@ const styles = StyleSheet.create({
         fontSize: 18,
         flex: 1,
         marginLeft: 10,
-        color: colors.placeholderColor,
+        color: colors.blue,
     },
 });

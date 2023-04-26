@@ -20,6 +20,7 @@ export const SearchSuggestionScreen = ({ navigation, route }) => {
     const { chooseStartPoint, chooseDestination } = useContext(LocationContext);
     const placeholderText = route.params.placeholderText;
     const goBackToScreen = route.params.goBackTo;
+    console.log(goBackToScreen);
 
     const handle = (location) => {
         console.log("something");
@@ -64,6 +65,7 @@ export const SearchSuggestionScreen = ({ navigation, route }) => {
 const styles = StyleSheet.create({
     container: {
         marginLeft: 10,
+        marginTop: 10,
     },
     suggestionBox: {
         height: 750,

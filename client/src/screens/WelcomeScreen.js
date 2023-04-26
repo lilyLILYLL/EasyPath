@@ -85,9 +85,7 @@ export const WelcomeScreen = () => {
 };
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
+    container: {},
     logoView: {
         flexDirection: "row",
         justifyContent: "space-between",
