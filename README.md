@@ -1,5 +1,5 @@
 # EasyPath
-UOW navigation app 
+
 <p float="left" align="center">
   <img src="https://user-images.githubusercontent.com/115124949/234748186-5e96623d-5830-48b6-b4d6-da73a71e02f9.png" width="220" height="441">
   <img src="https://user-images.githubusercontent.com/115124949/234748207-11f04bb7-9d80-4b61-b88c-8c443649a75c.png" width="220" height="441">
