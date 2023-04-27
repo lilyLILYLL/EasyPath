@@ -13,3 +13,19 @@ UOW navigation app
   <img src="https://user-images.githubusercontent.com/115124949/234748244-1c8c47a8-3524-46c8-a9f5-7d5c4d4bc8d7.png" width="220" height="441">
 </p>
 
+
+## Getting Started
+  ### Installation
+    1. npm install
+    2. npx expo start
+    3. Run it on physical devices or simulators to see the app
+  
+## Tech/Framework used
+  * React Native
+  * Expo
+  
+## Authors and contributors
+* Lilly Nguyen
+  
+  
+   
