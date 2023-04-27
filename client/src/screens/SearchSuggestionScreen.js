@@ -6,7 +6,7 @@ import {
     StyleSheet,
     Keyboard,
 } from "react-native";
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import buildings from "../constants/buildings";
 import { SuggestionRow } from "../components/SuggestionRow";
 
@@ -17,13 +17,23 @@ import { RoundedSearchBar } from "../components/layout/RoundedSearchBar";
 import { GoBackIcon } from "../components/layout/Icons";
 
 export const SearchSuggestionScreen = ({ navigation, route }) => {
+    const [inputValue, setInputValue] = useState("");
+    const [filteredList, setFilteredList] = useState(buildings);
+
+    // using callback function to pass information from a child to a parent
+    const handleInputText = (newValue) => {
+        setInputValue(newValue);
+    };
+
+    useEffect(() => {
+        setFilteredList(buildings.filter((item) => item.includes(inputValue)));
+    }, [inputValue]);
+
     const { chooseStartPoint, chooseDestination } = useContext(LocationContext);
     const placeholderText = route.params.placeholderText;
     const goBackToScreen = route.params.goBackTo;
-    console.log(goBackToScreen);
 
     const handle = (location) => {
-        console.log("something");
         if (route.params.title === "destination") {
             chooseDestination(location);
         } else {
@@ -38,12 +48,13 @@ export const SearchSuggestionScreen = ({ navigation, route }) => {
                 icon={<GoBackIcon onPress={() => navigation.pop()} />}
                 placeholderText={placeholderText}
                 autoFocus={true}
+                onChangeText={handleInputText}
             />
             <View style={styles.suggestionBox}>
                 <Text style={styles.historyText}>SUGGESTIONS</Text>
 
                 <FlatList
-                    data={buildings}
+                    data={filteredList}
                     renderItem={({ item }) => {
                         return (
                             <SuggestionRow

@@ -5,9 +5,6 @@ import Screens from "../constants/Screens";
 import { RoundedSearchBar } from "../components/layout/RoundedSearchBar";
 import { LocationIcon } from "../components/layout/Icons";
 export const InterestedPlacesScreen = ({ navigation }) => {
-    const toggleDrawer = () => {
-        navigation.openDrawer();
-    };
     const searchDestination = () =>
         navigation.push(Screens.SUGGESTION, {
             placeholderText: "Choose Destination",

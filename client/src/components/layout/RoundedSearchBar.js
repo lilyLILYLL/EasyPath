@@ -8,6 +8,7 @@ export const RoundedSearchBar = ({
     placeholderText,
     onPress,
     autoFocus,
+    onChangeText,
 }) => {
     return (
         <SafeAreaView style={styles.container}>
@@ -18,6 +19,7 @@ export const RoundedSearchBar = ({
                 style={styles.text}
                 autoFocus={autoFocus}
                 autoCorrect={false}
+                onChangeText={(value) => onChangeText(value)}
             />
             <SearchIcon />
         </SafeAreaView>

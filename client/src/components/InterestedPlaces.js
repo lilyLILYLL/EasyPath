@@ -26,7 +26,7 @@ export const InterestedPlaces = () => {
         });
     };
     return (
-        <ScrollView style={styles.container}>
+        <ScrollView contentContainerStyle={styles.container}>
             {interestedPlaces &&
                 interestedPlaces.map(({ icon, location }, index) => {
                     return (
@@ -62,11 +62,10 @@ const LocationItem = ({ icon, locationName, onChooseDestination }) => {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         marginHorizontal: 20,
-        height: 680,
-        marginBottom: 20,
         marginTop: 20,
+        flexGrow: 1,
+        paddingBottom: "50%",
     },
     locationItem: {
         flexDirection: "row",

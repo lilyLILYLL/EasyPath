@@ -16,6 +16,7 @@ import Screens from "../constants/Screens";
 import { LoadingIcon } from "../components/layout/LoadingIcon";
 import { LocationIcon } from "../components/layout/Icons";
 import { RoundedSearchBar } from "../components/layout/RoundedSearchBar";
+import { ColorSpace } from "react-native-reanimated";
 
 export const WelcomeScreen = () => {
     const navigation = useNavigation();
@@ -24,10 +25,6 @@ export const WelcomeScreen = () => {
     useEffect(() => {
         fetch();
     }, []);
-
-    const toggleDrawer = () => {
-        navigation.openDrawer();
-    };
 
     const showSuggestionList = () =>
         navigation.push(Screens.SUGGESTION, {
@@ -39,6 +36,9 @@ export const WelcomeScreen = () => {
     return (
         <SafeAreaView style={styles.container}>
             <StatusBar />
+            <View>
+                <Text style={styles.welcomeText}>Welcome Lilly</Text>
+            </View>
 
             <RoundedSearchBar
                 onPress={showSuggestionList}
@@ -51,7 +51,9 @@ export const WelcomeScreen = () => {
                 <Text style={styles.headerText}>Recent Searches</Text>
                 <View style={styles.seperator}></View>
 
-                <ScrollView>
+                <ScrollView
+                    contentContainerStyle={styles.recentSearchScrollView}
+                >
                     {state.isLoading ? (
                         <LoadingIcon />
                     ) : (
@@ -85,7 +87,14 @@ export const WelcomeScreen = () => {
 };
 
 const styles = StyleSheet.create({
-    container: {},
+    welcomeText: {
+        fontSize: 50,
+        color: colors.blue,
+        fontWeight: "bold",
+        marginLeft: 20,
+        marginTop: 30,
+        marginBottom: 10,
+    },
     logoView: {
         flexDirection: "row",
         justifyContent: "space-between",
@@ -98,6 +107,10 @@ const styles = StyleSheet.create({
         height: 690,
         marginTop: 15,
         borderRadius: 30,
+    },
+    recentSearchScrollView: {
+        flexGrow: 1,
+        paddingBottom: "30%",
     },
     button: {
         flexDirection: "column",

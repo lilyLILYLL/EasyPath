@@ -10,4 +10,5 @@ export default {
     placeholderColor: "#999999",
     shadowColor: "#000000",
     seaBLue: "#1589FF",
+    black: "#000000",
 };

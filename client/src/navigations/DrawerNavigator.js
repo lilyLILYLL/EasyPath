@@ -53,21 +53,20 @@ const Drawer = createDrawerNavigator();
 export const DrawerNavigator = () => {
     return (
         <Drawer.Navigator
-            initialRouteName={Screens.WELCOME}
             drawerContent={(props) => <CustomDrawerMenu {...props} />}
             screenOptions={{
                 drawerPosition: "left",
             }}
+            initialRouteName={Screens.INTERESTED_PLACE}
         >
-            <Drawer.Screen
-                name={Screens.WELCOME}
-                component={WelcomeScreen}
-                options={{ headerShown: false }}
-            />
-
             <Drawer.Screen
                 name={Screens.INTERESTED_PLACE}
                 component={InterestedPlacesScreen}
+                options={{ headerShown: false }}
+            />
+            <Drawer.Screen
+                name={Screens.WELCOME}
+                component={WelcomeScreen}
                 options={{ headerShown: false }}
             />
         </Drawer.Navigator>
