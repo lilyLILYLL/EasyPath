@@ -4,7 +4,6 @@ import {
     View,
     TouchableOpacity,
     ScrollView,
-    SafeAreaView,
 } from "react-native";
 import React, { useContext } from "react";
 
@@ -19,22 +18,25 @@ export const InterestedPlaces = () => {
     const navigation = useNavigation();
     const { chooseDestination } = useContext(LocationContext);
 
-    const onChooseDestination = (locationName) => {
-        chooseDestination(locationName);
+    const onChooseDestination = (item) => {
+        chooseDestination(item.title);
         navigation.navigate(Screens.MAP, {
             goBackTo: Screens.INTERESTED_PLACE,
+            coords: {
+                latitude: item.latitude,
+                longitude: item.longitude,
+            },
         });
     };
     return (
         <ScrollView contentContainerStyle={styles.container}>
             {interestedPlaces &&
-                interestedPlaces.map(({ icon, location }, index) => {
+                interestedPlaces.map((item, index) => {
                     return (
                         <LocationItem
-                            icon={icon}
-                            locationName={location}
-                            onChooseDestination={onChooseDestination}
+                            item={item}
                             key={index}
+                            onChooseDestination={onChooseDestination}
                         />
                     );
                 })}
@@ -42,15 +44,15 @@ export const InterestedPlaces = () => {
     );
 };
 
-const LocationItem = ({ icon, locationName, onChooseDestination }) => {
+const LocationItem = ({ item, onChooseDestination }) => {
     return (
-        <TouchableOpacity onPress={() => onChooseDestination(locationName)}>
+        <TouchableOpacity onPress={() => onChooseDestination(item)}>
             <View style={styles.locationItem}>
                 <View style={styles.icon}>
-                    <Text style={styles.icon}>{icon}</Text>
+                    <Text style={styles.icon}>{item.icon}</Text>
                 </View>
                 <View style={styles.location}>
-                    <Text style={styles.locationText}>{locationName}</Text>
+                    <Text style={styles.locationText}>{item.title}</Text>
                     <Text style={styles.text}> Open: 9am - 5pm</Text>
                 </View>
                 <ForwardIcon style={styles.forward} />

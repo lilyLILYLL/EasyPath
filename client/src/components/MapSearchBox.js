@@ -8,17 +8,17 @@ import { SquaredSearchBar } from "../components/layout/SquaredSearchBar";
 import Screens from "../constants/Screens";
 import { LocationContext } from "../contexts/LocationContext";
 import colors from "../constants/colors";
+
 export const MapSearchBox = () => {
     const navigation = useNavigation();
     const route = useRoute();
     const params = route.params;
-    console.log(params);
 
     const { startPoint, destination, chooseDestination, chooseStartPoint } =
         useContext(LocationContext);
 
     const searchStartPoint = () => {
-        navigation.navigate(Screens.SUGGESTION, {
+        navigation.push(Screens.SUGGESTION, {
             placeholderText: "Choose Start Point",
             title: "startPoint",
             goBackTo: params.goBackTo,
@@ -26,7 +26,7 @@ export const MapSearchBox = () => {
     };
 
     const searchDestination = () => {
-        navigation.navigate(Screens.SUGGESTION, {
+        navigation.push(Screens.SUGGESTION, {
             placeholderText: "Choose Destination",
             title: "destination",
             goBackTo: params.goBackTo,
@@ -46,11 +46,11 @@ export const MapSearchBox = () => {
 
             <View style={styles.searchInput}>
                 <SquaredSearchBar
-                    onPress={searchStartPoint}
+                    handleOnPress={searchStartPoint}
                     searchValue={startPoint}
                 />
                 <SquaredSearchBar
-                    onPress={searchDestination}
+                    handleOnPress={searchDestination}
                     searchValue={destination}
                 />
             </View>

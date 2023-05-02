@@ -5,38 +5,33 @@ import {
     ActivityIndicator,
     Dimensions,
 } from "react-native";
-import React, { useState, useContext, useRef } from "react";
+import React, { useContext, useRef } from "react";
 import MapView, { PROVIDER_GOOGLE, Marker } from "react-native-maps";
 import MapViewDirections from "react-native-maps-directions";
-
 import { MaterialIcons } from "@expo/vector-icons";
 import { OriginMarker } from "../components/layout/Icons";
 import { useCurrentLocation } from "../hooks/useCurrentLocation";
 import { RouteContext } from "../contexts/RouteContext";
-
 import colors from "../constants/colors";
+import { useRoute } from "@react-navigation/native";
 
 const MAP_API_KEY = "AIzaSyAaeSswQMnnAINGNIA73Q2AVO1vZ1_jX18";
-
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 const ratio = (height / width).toFixed(4);
 
-const destination = {
-    latitude: -33.4097296,
-    longitude: 150.878431,
-};
 export const Map = () => {
     const location = useCurrentLocation();
     const { setDistance, setDuration, duration } = useContext(RouteContext);
-
+    const route = useRoute();
     const mapRef = useRef(null);
 
     if (!location) {
         return <ActivityIndicator size={20} style={{ marginTop: 200 }} />;
     }
+    const initialLocation = location.coords; // here
+    const destination = route.params.coords;
 
-    const initialLocation = location.coords;
     return (
         <View style={styles.mapView}>
             <View style={styles.mapHeader}>

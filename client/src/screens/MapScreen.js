@@ -2,7 +2,6 @@ import { StyleSheet, SafeAreaView, Text } from "react-native";
 import React, { useContext, useRef, useEffect } from "react";
 import colors from "../constants/colors";
 import { SearchContext } from "../contexts/SearchContext";
-import moment from "moment";
 import { StatusBarForm } from "../components/layout/StatusBarForm";
 import { Map } from "../components/Map";
 import { BottomModalView } from "../components/layout/BottomModalView";
@@ -12,22 +11,13 @@ import {
 } from "@gorhom/bottom-sheet";
 import { MapSearchBox } from "../components/MapSearchBox";
 
-const DUMMY_TIME = 6;
-
-export const MapScreen = ({ navigation, route }) => {
-    const { addRecentSearch } = useContext(SearchContext);
-    const currentDate = moment().format("DD/MM/YYYY");
-
+export const MapScreen = () => {
     // ref to the bottom modal sheet
     const bottomSheetModal = useRef(null);
 
     useEffect(() => {
         bottomSheetModal?.current?.present();
     }, []);
-
-    const search = (startPoint, destination) => {
-        addRecentSearch(startPoint, destination, currentDate, DUMMY_TIME);
-    };
 
     return (
         // put modalProvider here because only mapScreen can open a bottomSheetModal
@@ -50,27 +40,4 @@ export const MapScreen = ({ navigation, route }) => {
     );
 };
 
-const styles = StyleSheet.create({
-    startButton: {
-        flexDirection: "row",
-        borderWidth: 1,
-        borderColor: "black",
-        padding: 10,
-        marginHorizontal: 150,
-        borderRadius: 15,
-        backgroundColor: colors.blue,
-        justifyContent: "center",
-    },
-    buttonText: {
-        marginLeft: 10,
-        fontSize: 18,
-        fontWeight: "bold",
-        color: colors.white,
-    },
-    text: {
-        fontWeight: "bold",
-        alignSelf: "center",
-        marginTop: 100,
-        fontSize: 30,
-    },
-});
+const styles = StyleSheet.create({});

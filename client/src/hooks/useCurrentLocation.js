@@ -9,7 +9,6 @@ export const useCurrentLocation = () => {
             try {
                 const { status } =
                     await Location.requestForegroundPermissionsAsync();
-                console.log(status);
                 if (status !== "granted") {
                     return;
                 }
@@ -22,7 +21,6 @@ export const useCurrentLocation = () => {
             } catch (err) {
                 throw new Error(err.message);
             }
-            console.log(23);
         };
         startWaitching();
 

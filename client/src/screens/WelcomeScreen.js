@@ -16,15 +16,10 @@ import Screens from "../constants/Screens";
 import { LoadingIcon } from "../components/layout/LoadingIcon";
 import { LocationIcon } from "../components/layout/Icons";
 import { RoundedSearchBar } from "../components/layout/RoundedSearchBar";
-import { ColorSpace } from "react-native-reanimated";
 
 export const WelcomeScreen = () => {
     const navigation = useNavigation();
     const { state, fetch } = useContext(SearchContext);
-
-    useEffect(() => {
-        fetch();
-    }, []);
 
     const showSuggestionList = () =>
         navigation.push(Screens.SUGGESTION, {

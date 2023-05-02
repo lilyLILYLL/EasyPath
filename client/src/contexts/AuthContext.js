@@ -71,7 +71,7 @@ export const AuthContextProvider = ({ children }) => {
                 // setItem for auto local signinh
                 await AsyncStorage.setItem("email", email);
                 await AsyncStorage.setItem("password", password);
-                await AsyncStorage.setItem("token", res.user.uid);
+                await AsyncStorage.setItem("userId", res.user.uid);
 
                 // update state
                 dispatch({
@@ -102,7 +102,7 @@ export const AuthContextProvider = ({ children }) => {
             await auth.signOut();
             await AsyncStorage.removeItem("email");
             await AsyncStorage.removeItem("password");
-            await AsyncStorage.removeItem("token");
+            await AsyncStorage.removeItem("userId");
             dispatch({ type: "log_out" });
             RootNavigation.navigate(Screens.AUTH);
         } catch (error) {

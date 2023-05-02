@@ -3,9 +3,24 @@ import React, { useContext, useEffect } from "react";
 import { RouteContext } from "../../contexts/RouteContext";
 import colors from "../../constants/colors";
 import { FontAwesome } from "@expo/vector-icons";
+import { LocationContext } from "../../contexts/LocationContext";
+import { SearchContext } from "../../contexts/SearchContext";
+import moment from "moment";
 
 export const BottomModalView = () => {
     const { distance, duration } = useContext(RouteContext);
+    const { addRecentSearch } = useContext(SearchContext);
+    const currentDate = moment().format("DD/MM/YYYY");
+    const { startPoint, destination } = useContext(LocationContext);
+
+    useEffect(() => {
+        formatDuration();
+    }, [duration]);
+
+    const handlePress = () => {
+        addRecentSearch(startPoint, destination, currentDate, duration);
+    };
+
     let formatedDuration = "";
 
     const formatDuration = () => {
@@ -20,10 +35,6 @@ export const BottomModalView = () => {
         }
     };
 
-    useEffect(() => {
-        formatDuration();
-    }, [duration]);
-
     formatDuration();
     return (
         <View style={styles.container}>
@@ -31,7 +42,7 @@ export const BottomModalView = () => {
                 <Text style={styles.duration}>{formatedDuration}</Text>
                 <Text style={styles.distance}>{`(${distance} km)`}</Text>
             </View>
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity style={styles.button} onPress={handlePress}>
                 <Text style={styles.buttonText}>GO THERE</Text>
                 <FontAwesome
                     name="location-arrow"

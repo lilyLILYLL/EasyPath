@@ -26,7 +26,9 @@ export const SearchSuggestionScreen = ({ navigation, route }) => {
     };
 
     useEffect(() => {
-        setFilteredList(buildings.filter((item) => item.includes(inputValue)));
+        setFilteredList(
+            buildings.filter((item) => item.titleName.includes(inputValue))
+        );
     }, [inputValue]);
 
     const { chooseStartPoint, chooseDestination } = useContext(LocationContext);
@@ -35,11 +37,17 @@ export const SearchSuggestionScreen = ({ navigation, route }) => {
 
     const handle = (location) => {
         if (route.params.title === "destination") {
-            chooseDestination(location);
+            chooseDestination(location.titleName);
         } else {
-            chooseStartPoint(location);
+            chooseStartPoint(location.titleName);
         }
-        navigation.navigate(Screens.MAP, { goBackTo: goBackToScreen });
+        navigation.navigate(Screens.MAP, {
+            goBackTo: goBackToScreen,
+            coords: {
+                latitude: location.latitude,
+                longitude: location.longitude,
+            },
+        });
     };
     return (
         <SafeAreaView style={styles.container}>
@@ -58,13 +66,12 @@ export const SearchSuggestionScreen = ({ navigation, route }) => {
                     renderItem={({ item }) => {
                         return (
                             <SuggestionRow
-                                name={item}
-                                key={item.index}
+                                name={item.titleName}
                                 onPress={() => handle(item)}
                             />
                         );
                     }}
-                    keyExtractor={(item) => item}
+                    keyExtractor={(item) => item.id}
                     keyboardShouldPersistTaps="always"
                     onScroll={() => Keyboard.dismiss()}
                 />
