@@ -88,8 +88,25 @@ export const MapScreenIcon = () => {
         </View>
     );
 };
-export const SwapIconVertical = () => {
-    return <MaterialIcons name="swap-vert" size={45} color={colors.blue} />;
+export const SwapIconVertical = ({ onPress }) => {
+    return (
+        <MaterialIcons
+            name="swap-vert"
+            size={45}
+            color={colors.blue}
+            onPress={onPress}
+        />
+    );
+};
+
+export const OriginMarker = () => {
+    return (
+        <View style={styles.shadow}>
+            <View style={styles.biggerBox}>
+                <View style={styles.smallerBox}></View>
+            </View>
+        </View>
+    );
 };
 
 const styles = StyleSheet.create({
@@ -97,5 +114,31 @@ const styles = StyleSheet.create({
         backgroundColor: colors.lightgray,
         padding: 5,
         borderRadius: 20,
+    },
+    biggerBox: {
+        width: 20,
+        height: 20,
+        borderRadius: 20,
+        backgroundColor: colors.white,
+        alignItems: "center",
+        flexDirection: "row",
+        justifyContent: "center",
+    },
+    smallerBox: {
+        backgroundColor: colors.seaBLue,
+        width: 10,
+        height: 10,
+        borderRadius: 10,
+    },
+    shadow: {
+        width: 60,
+        height: 60,
+        borderRadius: 60,
+        backgroundColor: "rgba(179, 219, 230,0.5)",
+        alignItems: "center",
+        flexDirection: "row",
+        justifyContent: "center",
+        borderWidth: 1,
+        borderColor: "rgba(179, 219, 230,1)",
     },
 });

@@ -10,4 +10,5 @@ export default {
     TAB_NAVIGATOR: "Tab Navigator",
     SETTING: "Settings",
     LOGIN: "Login Screen",
+    MODAL: "Modal Screen",
 };

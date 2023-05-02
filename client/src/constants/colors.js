@@ -11,4 +11,5 @@ export default {
     shadowColor: "#000000",
     seaBLue: "#1589FF",
     black: "#000000",
+    gray: "#808080",
 };

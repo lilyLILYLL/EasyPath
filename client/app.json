@@ -1,25 +1,34 @@
 {
-  "expo": {
-    "name": "EasyPath",
-    "slug": "EasyPath",
-    "version": "1.0.0",
-    "orientation": "portrait",
-    "userInterfaceStyle": "light",
-    
-    "updates": {
-      "fallbackToCacheTimeout": 0
-    },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
-    "ios": {
-      "supportsTablet": true
-    },
-    "android": {
-      "adaptiveIcon": {
-        "backgroundColor": "#FFFFFF"
-      }
+    "expo": {
+        "name": "EasyPath",
+        "slug": "EasyPath",
+        "version": "1.0.0",
+        "orientation": "portrait",
+        "userInterfaceStyle": "light",
+
+        "updates": {
+            "fallbackToCacheTimeout": 0
+        },
+        "assetBundlePatterns": ["**/*"],
+        "ios": {
+            "supportsTablet": true,
+            "config": {
+                "googleMapsApiKey": "AIzaSyAaeSswQMnnAINGNIA73Q2AVO1vZ1_jX18"
+            },
+            "bundleIdentifier": "com.example.EasyPath"
+        },
+        "android": {
+            "adaptiveIcon": {
+                "backgroundColor": "#FFFFFF"
+            }
+        },
+        "plugins": [
+            [
+                "expo-location",
+                {
+                    "locationAlwaysAndWhenInUsePermission": "Allow EasyPath to use your location."
+                }
+            ]
+        ]
     }
-    
-  }
 }
