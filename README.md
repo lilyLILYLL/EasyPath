@@ -1,11 +1,31 @@
 # EasyPath
-UOW navigation app 
+
 <p float="left" align="center">
-  <img src="https://user-images.githubusercontent.com/115124949/226169626-83aa35ca-cc4b-46f8-8e6e-1b2ac91516b5.PNG" width="250" height="525">
-  <img src="https://user-images.githubusercontent.com/115124949/226169628-3896edbe-f8eb-437f-950f-78b78477c9f0.PNG" width="250" height="525">
-  <img src="https://user-images.githubusercontent.com/115124949/226169633-2f729873-5ed1-462b-a586-a163c4bf627e.PNG" width="250" height="525">
+  <img src="https://user-images.githubusercontent.com/115124949/234748186-5e96623d-5830-48b6-b4d6-da73a71e02f9.png" width="220" height="441">
+  <img src="https://user-images.githubusercontent.com/115124949/234748207-11f04bb7-9d80-4b61-b88c-8c443649a75c.png" width="220" height="441">
+  <img src="https://user-images.githubusercontent.com/115124949/234748228-2e467629-b0e1-4ab8-a3d2-c3cdf80830f1.png" width="220" height="441">
 </p>
 <p float="left" align="center">
-  <img src="https://user-images.githubusercontent.com/115124949/226169634-6df79968-d667-4196-9355-811600552dbe.PNG" width="250" height="525">
-  <img src="https://user-images.githubusercontent.com/115124949/226169635-966665b8-f4f7-4e42-bc93-fa52fe510bf3.PNG" width="250" height="525">
+  <img src="https://user-images.githubusercontent.com/115124949/234748235-bd6c61fe-b5a8-49a7-b45a-855636b8bb2a.png" width="220" height="441">
+  
+  <img src="https://user-images.githubusercontent.com/115124949/234748246-e1f64c2b-ff65-4675-9b93-9daa6113b376.png" width="220" height="441">
+  <img src="https://user-images.githubusercontent.com/115124949/234748253-7d2b47ce-1912-4866-a1be-b20a71b06f3f.png" width="220" height="441">
+  <img src="https://user-images.githubusercontent.com/115124949/234748244-1c8c47a8-3524-46c8-a9f5-7d5c4d4bc8d7.png" width="220" height="441">
 </p>
+
+
+## Getting Started
+  ### Installation
+    1. npm install
+    2. npx expo start
+    3. Run it on physical devices or simulators to see the app
+  
+## Tech/Framework used
+  * React Native
+  * Expo
+  
+## Authors and contributors
+* Lilly Nguyen
+  
+  
+   
