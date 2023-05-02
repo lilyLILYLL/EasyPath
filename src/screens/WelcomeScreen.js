@@ -21,6 +21,10 @@ export const WelcomeScreen = () => {
     const navigation = useNavigation();
     const { state, fetch } = useContext(SearchContext);
 
+    useEffect(() => {
+        fetch();
+    }, []);
+
     const showSuggestionList = () =>
         navigation.push(Screens.SUGGESTION, {
             placeholderText: "Choose Destination",

@@ -1,2 +1,0 @@
-# EasyPath
-UOW navigation app 

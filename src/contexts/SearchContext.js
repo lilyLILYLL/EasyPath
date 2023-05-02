@@ -27,10 +27,6 @@ export const SearchContextProvider = ({ children }) => {
         isLoading: false,
     });
 
-    useEffect(() => {
-        fetch();
-    }, []);
-
     // adding a new recent search into database
     const addRecentSearch = async (from, to, date, time) => {
         // add a new search into database
